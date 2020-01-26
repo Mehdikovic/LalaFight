@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6fd773e0434944fa79150dacd8cea8, type: 3}
-  m_Name: Pistol1_ReloadSpeed
+  m_Name: Shotgun1_ReloadTime
   m_EditorClassIdentifier: 
   _defaultValue: 0
   _values:
-  - 1
-  - 0.8
-  - 0.7
+  - 2.5
+  - 2.1
+  - 1.9

@@ -6,8 +6,9 @@ public class SingleProjectileWeaponStat : WeaponStats
 {
     public WeaponBulletPerBurstShot bulletPerBurstShot;
 
-    public SingleProjectileWeaponStat() : base()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         _properties.Add("bulletPerBurstShot", bulletPerBurstShot);
     }
 

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d6fd773e0434944fa79150dacd8cea8, type: 3}
-  m_Name: Rifle1_ReloadSpeed
+  m_Name: Rifle1_ReloadTime
   m_EditorClassIdentifier: 
   _defaultValue: 0
   _values:

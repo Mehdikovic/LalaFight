@@ -36,7 +36,9 @@ public abstract class Weapon : MonoBehaviour
     public int damage => _stats.damage.value;
     public float bulletSpeed => _stats.bulletSpeed.value;
     public float fireRate => _stats.fireRate.value;
-    
+    public int magazieSize => _stats.magazineSize.value;
+    public float reloadTime => _stats.reloadTime.value;
+
 
     public bool isAnimating => _isAnimating;
     
@@ -56,12 +58,12 @@ public abstract class Weapon : MonoBehaviour
                 { LockType.Magazine, false },
                 { LockType.Equipment, false },
         };
-        print("Called");
+        
         //TODO: Create ScriptleObject for holding data and level-ups
         //SetProperties(currentWeaponData);
     }
 
-
+    //TODO: delete this test
     private void Update()
     {
         if (Input.GetMouseButtonDown(1))

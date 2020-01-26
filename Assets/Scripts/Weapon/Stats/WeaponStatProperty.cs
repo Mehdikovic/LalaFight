@@ -10,6 +10,12 @@ public abstract class WeaponStatProperty<T> : ScriptableObject, IWeaponProperty
 
     public event Action<T> OnStatUpdated;
 
+    //TODo: delete this when the game is ready to play
+    private void OnEnable()
+    {
+        _currentLevel = 0;
+    }
+
     public virtual T value {
         get {
             if (_values.Length > 0)

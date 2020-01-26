@@ -9,17 +9,19 @@ public abstract class WeaponStats : ScriptableObject
     public WeaponBulletSpeed bulletSpeed;
     public WeaponFireRate fireRate;
     public WeaponMagazineSize magazineSize;
-    public WeaponReloadSize reloadSpeed;
+    public WeaponReloadTime reloadTime;
 
     protected Dictionary<string, IWeaponProperty> _properties = null;
 
-    public WeaponStats()
+    protected virtual void OnEnable()
     {
         _properties = new Dictionary<string, IWeaponProperty>();
         _properties.Add("damage", damage);
         _properties.Add("accuracy", accuracy);
         _properties.Add("bulletSpeed", bulletSpeed);
         _properties.Add("fireRate", fireRate);
+        _properties.Add("magazineSize", magazineSize);
+        _properties.Add("reloadTime", reloadTime);
     }
 
     public bool UpdateStat(string propertyName)
@@ -43,6 +45,8 @@ public abstract class WeaponStats : ScriptableObject
         sb.Append("accuracy: ").Append(accuracy.value).AppendLine();
         sb.Append("bulletSpeed: ").Append(bulletSpeed.value).AppendLine();
         sb.Append("fireRate: ").Append(fireRate.value).AppendLine();
+        sb.Append("magazine Size: ").Append(magazineSize.value).AppendLine();
+        sb.Append("reloadTime: ").Append(reloadTime.value).AppendLine();
         return sb.ToString();
     }
 }

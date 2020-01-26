@@ -17,5 +17,5 @@ MonoBehaviour:
   bulletSpeed: {fileID: 11400000, guid: 1fb6ebc4abba6cd42af2e257595901f5, type: 2}
   fireRate: {fileID: 11400000, guid: df923e89f90301c4596e2f63f4a89834, type: 2}
   magazineSize: {fileID: 11400000, guid: 695a5a099f1ce5446929d549cac6a6fc, type: 2}
-  reloadSpeed: {fileID: 11400000, guid: 32ed97c315ee3a44b96ac290eba23e71, type: 2}
+  reloadTime: {fileID: 11400000, guid: 32ed97c315ee3a44b96ac290eba23e71, type: 2}
   bulletPerBurstShot: {fileID: 11400000, guid: 3146438cae1eda2409d8dac3af845a41, type: 2}

@@ -5,18 +5,13 @@ using UnityEngine;
 
 public class MagazineController : MonoBehaviour, IMagazineController
 {
-    [SerializeField] private int _magazineSize = 30;
-    [SerializeField] private float _reloadTime = 1.3f;
-	
 	private int _currentMagazine = 0;
     private bool _isReloading = false;
 
 	private Coroutine _reloadCoroutine;
 	private IntObject _ammo = new IntObject() { Value = 500 };
 	private Weapon _weapon;
-
 	
-
 	//EVENTS
 	public event Action NoAmmunationAtInventory;
 	public event Action Reloading;
@@ -25,9 +20,9 @@ public class MagazineController : MonoBehaviour, IMagazineController
 	public event Action MagazineFull;
 
 	//GETTERS AND SETTERS
-	public int magazineSize => _magazineSize;
+	public int magazineSize => _weapon.magazieSize;
 
-    public float reloadTime => _reloadTime;
+    public float reloadTime => _weapon.reloadTime;
 
     public int currentMagazine => _currentMagazine;
 
@@ -44,7 +39,7 @@ public class MagazineController : MonoBehaviour, IMagazineController
 		_weapon.OnWeaponUnloaded += OnWeaponUnloaded;
 
 		//TODO: Remember we need to update this when UPGRADING happend
-		_currentMagazine = _magazineSize;
+		_currentMagazine = magazineSize;
 	}
 
 	private void OnWeaponUnloaded()
@@ -82,7 +77,7 @@ public class MagazineController : MonoBehaviour, IMagazineController
 			NoAmmunationAtInventory?.Invoke();
 			return;
 		}
-		if (_currentMagazine == _magazineSize)
+		if (_currentMagazine == magazineSize)
 		{
 			MagazineFull?.Invoke();
 			return;
@@ -102,9 +97,9 @@ public class MagazineController : MonoBehaviour, IMagazineController
 
 	private IEnumerator ReloadingWaitTime()
 	{
-		yield return new WaitForSeconds(_reloadTime);
+		yield return new WaitForSeconds(reloadTime);
 
-		var neededAmmo = _magazineSize - _currentMagazine;
+		var neededAmmo = magazineSize - _currentMagazine;
 		if (neededAmmo >= _ammo.Value)
 		{
 			_currentMagazine += _ammo.Value;
