@@ -115,17 +115,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332d42dca72501d47913a3c726a5b474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
   _modelName: m9
-  _damage: 4
-  _bulletSpeed: 100
-  _accuracy: 1
-  _fireRate: 0.15
+  _type: 0
+  _bulletType: 0
   _muzzle: {fileID: 3348655838904608954}
   _bulletPrefab: {fileID: 1677636836140834538, guid: c2cc4660252398f45a771d838ac180e8,
     type: 3}
+  _stats: {fileID: 11400000, guid: 753df983b571e7444ad6667be70daefd, type: 2}
   _fireModes: 00000000
-  _burstShootsCount: 3
 --- !u!114 &3794526037709931585
 MonoBehaviour:
   m_ObjectHideFlags: 0

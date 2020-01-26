@@ -7,11 +7,11 @@ public enum FireModeType
     Auto
 }
 
-static public class FireMode
+static public class FireModeTypes
 {
     static private Dictionary<FireModeType, string> _names;
 
-    static FireMode()
+    static FireModeTypes()
     {
         _names = new Dictionary<FireModeType, string>()
         {
@@ -21,5 +21,5 @@ static public class FireMode
         };
     }
 
-    static public Dictionary<FireModeType, string> Names => _names;
+    static public Dictionary<FireModeType, string> names => _names;
 }

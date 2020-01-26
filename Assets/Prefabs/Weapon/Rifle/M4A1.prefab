@@ -144,17 +144,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332d42dca72501d47913a3c726a5b474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 3
   _modelName: m4a1
-  _damage: 5
-  _bulletSpeed: 120
-  _accuracy: 0.8
-  _fireRate: 0.11
+  _type: 3
+  _bulletType: 1
   _muzzle: {fileID: 6294185648442981164}
   _bulletPrefab: {fileID: 1677636836140834538, guid: c2cc4660252398f45a771d838ac180e8,
     type: 3}
+  _stats: {fileID: 11400000, guid: feb368ab6da171c48acc809fba8dea72, type: 2}
   _fireModes: 0200000000000000
-  _burstShootsCount: 3
 --- !u!114 &3896758348727443079
 MonoBehaviour:
   m_ObjectHideFlags: 0

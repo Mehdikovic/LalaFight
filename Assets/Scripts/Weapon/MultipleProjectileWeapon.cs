@@ -2,19 +2,18 @@
 
 public class MultipleProjectileWeapon : Weapon
 {
-    [Header("Bullet per shot")]
-    [SerializeField] private int _bulletsPerShot = 5;
-
     float[] shots;
-
+    private MultipleProjectileWeaponStat _multipleShotStat;
     protected override void Awake()
     {
         base.Awake();
 
-        shots = new float[_bulletsPerShot];
+        _multipleShotStat = _stats as MultipleProjectileWeaponStat;
+        shots = new float[_multipleShotStat.bulletPerShot.value];
+        int shotNumbers = _multipleShotStat.bulletPerShot.value;
 
-        for (int i = 0; i < _bulletsPerShot; ++i)
-            shots[i] = Utility.Map(i, 0, _bulletsPerShot - 1, -2, 2);
+        for (int i = 0; i < shotNumbers; ++i)
+            shots[i] = Utility.Map(i, 0, shotNumbers - 1, -2, 2);
     }
 
     protected override void HandleShootInputs()
@@ -25,13 +24,13 @@ public class MultipleProjectileWeapon : Weapon
 
     private void Shoot()
     {
-        CallOnFiredBeginEvent();
+        RaiseOnFiredBeginEvent();
         if (CanShoot())
         {
             NextShootingTime();
             for (int i = 0; i < shots.Length; ++i)
                 CreateBullet(shots[i] * 10);
-            CallOnFiredEndEvent();
+            RaiseOnFiredEndEvent();
         }
     }
 }

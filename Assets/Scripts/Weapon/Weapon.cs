@@ -7,37 +7,39 @@ public enum LockType { Magazine, Equipment }
 
 public abstract class Weapon : MonoBehaviour
 {
-    [SerializeField] private WeaponType _type = WeaponType.Pistol;
     [SerializeField] private string _modelName = "ex: m4a1";
-    
-    [Header("Properties")]
-    [SerializeField] private int _damage = 4;
-    [SerializeField] private float _bulletSpeed = 80f;
-    [SerializeField] private float _accuracy = 1.0f;
-    [SerializeField] private float _fireRate = 0.1f;
+    [SerializeField] private WeaponType _type = WeaponType.Pistol;
+    [SerializeField] private BulletType _bulletType = BulletType.Medium;
     
     [Header("Bullet")]
     [SerializeField] private Transform _muzzle = null;
     [SerializeField] private Bullet _bulletPrefab = null;
 
-    private float _nextShootingTime = 0f;
+    [Header("Weapon Stat[Single | Multiple]")]
+    [SerializeField] protected WeaponStats _stats = null;
     
-    private Transform _playerOwner = null;
-    private AmmunationInventory _ammoInventory = null;
-
+    private float _nextShootingTime = 0f;
     private bool _isAnimating = false;
-
     private Dictionary<LockType, bool> _locks;
 
-    //GETTERS AND SETTERS
-    public Transform playerOwner => _playerOwner;
-    public string modelName => _modelName;
-    public int damage => _damage;
-    public float bulletSpeed => _bulletSpeed;
-    public WeaponType type => _type;
-    public float accuracy => _accuracy;
-    public bool isAnimating => _isAnimating;
+    private Transform _playerOwner = null;
+    private AmmunationInventory _ammoInventory = null;
+    
 
+    //TODO: add equipment manager to modifying the stats' values
+    //GETTERS AND SETTERS
+    public string modelName => _modelName;
+    public WeaponType type => _type;
+    public Transform playerOwner => _playerOwner;
+
+    public float accuracy => _stats.accuracy.value;
+    public int damage => _stats.damage.value;
+    public float bulletSpeed => _stats.bulletSpeed.value;
+    public float fireRate => _stats.fireRate.value;
+    
+
+    public bool isAnimating => _isAnimating;
+    
     //EVENTS
     public event Action OnFireLockRequested;
     public event Action OnFireBegin;
@@ -54,11 +56,20 @@ public abstract class Weapon : MonoBehaviour
                 { LockType.Magazine, false },
                 { LockType.Equipment, false },
         };
-
+        print("Called");
         //TODO: Create ScriptleObject for holding data and level-ups
         //SetProperties(currentWeaponData);
     }
 
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            var text = GameObject.FindGameObjectWithTag("TextMeshPro").GetComponent<UnityEngine.UI.Text>();
+            text.text = _stats.ToString();
+        }
+    }
 
     //CUSTOM METHODS
     protected abstract void HandleShootInputs();
@@ -91,14 +102,14 @@ public abstract class Weapon : MonoBehaviour
         return result;
     }
 
-    protected void CallOnFiredBeginEvent()
+    protected void RaiseOnFiredBeginEvent()
     {
         OnFireLockRequested?.Invoke();
         OnFireBegin?.Invoke();
     }
-    protected void CallOnFiredEndEvent() => OnFireEnd?.Invoke();
+    protected void RaiseOnFiredEndEvent() => OnFireEnd?.Invoke();
     protected bool CanShoot() => IsWeaponLocked() == false && _isAnimating == false && Time.time > _nextShootingTime;
-    protected void NextShootingTime() => _nextShootingTime = Time.time + _fireRate;
+    protected void NextShootingTime() => _nextShootingTime = Time.time + fireRate;
     
     public void SetShootCursorPosition(Vector3 hitPoint, bool aimOnEnemy)
     {

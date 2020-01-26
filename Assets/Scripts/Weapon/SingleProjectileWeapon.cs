@@ -6,13 +6,11 @@ public class SingleProjectileWeapon : Weapon
     [Header("FireModes")]
     [SerializeField] private FireModeType[] _fireModes = new FireModeType[] { FireModeType.Auto };
 
-    [Header("Bullet per burst shot")]
-    [SerializeField] private int _burstShootsCount = 3;
-
     private bool _triggerReleasedSinceLastShot;
     private int _burstRemainingShoot;
 
     private int _currentFireModeIndex = 0;
+    private SingleProjectileWeaponStat _singleShotStat;
 
     //GETTERS AND SETTERS
     private FireModeType CurrentFireMode => _fireModes[_currentFireModeIndex];
@@ -20,6 +18,7 @@ public class SingleProjectileWeapon : Weapon
     //EVENTS
     public event Action<FireModeType> FireModeChanged;
 
+    
     private void SwapFireMode()
     {
         if (_fireModes.Length < 2)
@@ -33,7 +32,9 @@ public class SingleProjectileWeapon : Weapon
     protected override void Awake()
     {
         base.Awake();
-        _burstRemainingShoot = _burstShootsCount;
+        _singleShotStat = _stats as SingleProjectileWeaponStat;
+
+        _burstRemainingShoot = _singleShotStat.bulletPerBurstShot.value;
         _triggerReleasedSinceLastShot = true;
     }
 
@@ -50,7 +51,7 @@ public class SingleProjectileWeapon : Weapon
 
     private void Shoot()
     {
-        CallOnFiredBeginEvent();
+        RaiseOnFiredBeginEvent();
         if (CanShoot())
         {
             if (CurrentFireMode == FireModeType.Burst)
@@ -67,7 +68,7 @@ public class SingleProjectileWeapon : Weapon
 
             NextShootingTime();
             CreateBullet();
-            CallOnFiredEndEvent();
+            RaiseOnFiredEndEvent();
         }
     }
 
@@ -80,6 +81,6 @@ public class SingleProjectileWeapon : Weapon
     private void OnTriggerRelease()
     {
         _triggerReleasedSinceLastShot = true;
-        _burstRemainingShoot = _burstShootsCount;
+        _burstRemainingShoot = _singleShotStat.bulletPerBurstShot.value;
     }
 }
