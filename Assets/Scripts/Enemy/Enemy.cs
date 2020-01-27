@@ -30,14 +30,14 @@ public class Enemy : MonoBehaviour
     {
         _navAgent = GetComponent<NavMeshAgent>();
         _healthController = GetComponent<HealthController>();
-        _healthController.Dead += OnEnemyDeath;
+        _healthController.OnDeath += OnEnemyDeath;
         _meshRenderer = GetComponent<MeshRenderer>();
     }
 
     public void SetProperties(Wave wave)
     {
         _navAgent.speed = wave.enemySpeed;
-        _healthController.MaxHealth = wave.enemyHealth;
+        _healthController.maxHealth = wave.enemyHealth;
         _damage = wave.enemyDamage;
         _timeBetweenAttack = wave.enemyAttackRate;
         _attackSpeed = wave.enemyAttackSpeed;
@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
         if (_navAgent.enabled == false)
             return;
 
-        if (_target && _targetDamageable.IsDead == false && TargetInFOV() && TargetInAttackRange())
+        if (_target && _targetDamageable.isDead == false && TargetInFOV() && TargetInAttackRange())
         {
             if (Time.time > _nextAttackTime && TargetAtLOS())
             {

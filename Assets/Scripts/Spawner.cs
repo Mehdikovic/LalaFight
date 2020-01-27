@@ -115,7 +115,7 @@ public partial class Spawner : MonoBehaviour
 
         var enemy = Instantiate(_lightEnemyPrefab, tileTransform.position + Vector3.up, Quaternion.identity);
         enemy.SetTarget(_playerTransform);
-        enemy.GetComponent<HealthController>().Dead += OnEnemyDeath;
+        enemy.GetComponent<HealthController>().OnDeath += OnEnemyDeath;
         enemy.SetProperties(_waves[_currentWaveIndex]);
     }
 

@@ -18,7 +18,7 @@ public class GameOverUI : MonoBehaviour
 
         ChangeUIActive(false);
 
-        _player.GetComponent<HealthController>().Dead += OnPlayerDeath;
+        _player.GetComponent<HealthController>().OnDeath += OnPlayerDeath;
         _player.GetComponent<PlayerController>().OnPlayerFall += OnPlayerDeath;
     }
 

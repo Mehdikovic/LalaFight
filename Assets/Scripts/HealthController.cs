@@ -8,27 +8,27 @@ public class HealthController : MonoBehaviour, IDamageable
     private bool _isDead = false;
 
     //GETTERS AND SETTERS
-    public int MaxHealth {
+    public int maxHealth {
         get => _maxHealth;
         set {
             _maxHealth = value;
             _currentHealth = _maxHealth;
         }
     }
-    public int RemainingHealthPercent => Mathf.CeilToInt(_currentHealth * 100 / _maxHealth);
-    public bool IsDead => _isDead;
-    public int CurrentHealth => _currentHealth;
+    public int remainingHealthPercent => Mathf.CeilToInt(_currentHealth * 100 / _maxHealth);
+    public bool isDead => _isDead;
+    public int currentHealth => _currentHealth;
 
     //EVENTS
-    public event Action Dead;
+    public event Action OnDeath;
     public event Action<Vector3, Vector3> OnFinalDamage;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _currentHealth = _maxHealth;
     }
 
-    public void TakeDamage(int bulletDamage, Vector3 hitPosition, Vector3 hitDirection)
+    public virtual void TakeDamage(int bulletDamage, Vector3 hitPosition, Vector3 hitDirection)
     {
         _currentHealth -= bulletDamage;
         _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
@@ -43,7 +43,7 @@ public class HealthController : MonoBehaviour, IDamageable
     private void Die()
     {
         _isDead = true;
-        Dead?.Invoke();
+        OnDeath?.Invoke();
         Destroy(gameObject);
     }
 }

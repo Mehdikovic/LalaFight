@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 3754911042037574940}
   - component: {fileID: 2252849774192991536}
   - component: {fileID: 1252796972}
-  - component: {fileID: 1734096665}
+  - component: {fileID: 4746143785221116086}
   - component: {fileID: 551463621}
   - component: {fileID: 2921984364377958038}
   m_Layer: 12
@@ -356,7 +356,6 @@ MonoBehaviour:
   _pistolStartGun: {fileID: 4696563887833144946, guid: 58d39a154c496e14cb74f07963783715,
     type: 3}
   _otherStartGun:
-  - {fileID: 4213571547595016333, guid: 5307bdf4d952eb04ea680f370bee4746, type: 3}
   - {fileID: 1609277850915519537, guid: 067c8a6b349d8c542967dca5470b0ccd, type: 3}
   - {fileID: 2490325649292596324, guid: 233550796af7a0043b3084914d643013, type: 3}
 --- !u!114 &1252796972
@@ -375,7 +374,7 @@ MonoBehaviour:
   _startingSMGAmmo: 120
   _startingShotgunAmmo: 35
   _startingRifleAmmo: 90
---- !u!114 &1734096665
+--- !u!114 &4746143785221116086
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -384,10 +383,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2252849774192991528}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5d580c40bc2eb44b9619a2ae0957d9c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ae0b4a0b2b46f3418e27f354d74c5f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 30
+  _maxHealth: 10
+  _maxShield: 10
 --- !u!114 &551463621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1007,11 +1007,6 @@ PrefabInstance:
     - target: {fileID: 7627064267888032060, guid: 7a4e830246efd6a4887ac14ca266f7f4,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7627064267888032061, guid: 7a4e830246efd6a4887ac14ca266f7f4,
-        type: 3}
-      propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
