@@ -6,7 +6,7 @@ using UnityEngine;
 public class CameraInput : MonoBehaviour
 {
     private CameraController _cameraController;
-    private Transform _target;
+    private PlayerInput _target;
     bool _isPanning = false;
     bool _isPanningPrev = false;
 
@@ -15,7 +15,7 @@ public class CameraInput : MonoBehaviour
     private void Awake()
     {
         _cameraController = GetComponent<CameraController>();
-        _target = FindObjectOfType<PlayerInput>().transform;
+        _target = FindObjectOfType<PlayerInput>();
         _cameraController.SetTarget(_target);
     }
 

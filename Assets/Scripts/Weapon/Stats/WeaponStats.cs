@@ -10,6 +10,7 @@ public abstract class WeaponStats : ScriptableObject
     public WeaponFireRate fireRate;
     public WeaponMagazineSize magazineSize;
     public WeaponReloadTime reloadTime;
+    public WeaponScopeRange scopeRange;
 
     protected Dictionary<string, IWeaponProperty> _properties = null;
 
@@ -22,6 +23,7 @@ public abstract class WeaponStats : ScriptableObject
         _properties.Add("fireRate", fireRate);
         _properties.Add("magazineSize", magazineSize);
         _properties.Add("reloadTime", reloadTime);
+        _properties.Add("scopeRange", scopeRange);
     }
 
     public bool UpdateStat(string propertyName)
@@ -47,6 +49,7 @@ public abstract class WeaponStats : ScriptableObject
         sb.Append("fireRate: ").Append(fireRate.value).AppendLine();
         sb.Append("magazine Size: ").Append(magazineSize.value).AppendLine();
         sb.Append("reloadTime: ").Append(reloadTime.value).AppendLine();
+        sb.Append("scopeRange: ").Append(scopeRange.value).AppendLine();
         return sb.ToString();
     }
 }

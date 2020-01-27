@@ -89,6 +89,8 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
+    public float GetWeaponActiveRange() => currentWeapon.scopeRange;
+
     public void ToggleWeaponEnable()
     {
         if (_isWeaponHided == false)

@@ -30,6 +30,7 @@ public abstract class Weapon : MonoBehaviour
     //GETTERS AND SETTERS
     public string modelName => _modelName;
     public WeaponType type => _type;
+    public BulletType bulletType => _bulletType;
     public Transform playerOwner => _playerOwner;
 
     public float accuracy => _stats.accuracy.value;
@@ -38,6 +39,7 @@ public abstract class Weapon : MonoBehaviour
     public float fireRate => _stats.fireRate.value;
     public int magazieSize => _stats.magazineSize.value;
     public float reloadTime => _stats.reloadTime.value;
+    public float scopeRange => _stats.scopeRange.value;
 
 
     public bool isAnimating => _isAnimating;

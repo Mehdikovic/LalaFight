@@ -84,6 +84,8 @@ public class PlayerInput : MonoBehaviour
             _weaponManager.ToggleWeaponEnable();
     }
 
+    public float GetPlayerActiveRange() => _weaponManager.GetWeaponActiveRange();
+
     private Vector3 Movement()
     {
         /* Based On World Axis
