@@ -7,13 +7,18 @@ public abstract class WeaponStatProperty<T> : ScriptableObject, IWeaponProperty
     [SerializeField] private T[] _values = null;
 
     private int _currentLevel = 0;
+    private int _cashedCurrentLevel = 0;
 
     public event Action<T> OnStatUpdated;
 
     //TODo: delete this when the game is ready to play
     private void OnEnable()
     {
-        _currentLevel = 0;
+        var levelType = true;
+        if (levelType)
+            _currentLevel = 0;
+        else
+            _currentLevel = _cashedCurrentLevel;
     }
 
     public virtual T value {
@@ -28,6 +33,7 @@ public abstract class WeaponStatProperty<T> : ScriptableObject, IWeaponProperty
     {
         return _currentLevel + 1;
     }
+
     public virtual bool Update()
     {
         if (_values.Length == 0)
@@ -35,6 +41,10 @@ public abstract class WeaponStatProperty<T> : ScriptableObject, IWeaponProperty
         if (_currentLevel == _values.Length - 1)
             return false;
         ++_currentLevel;
+
+        if (_cashedCurrentLevel != _values.Length - 1)
+            ++_cashedCurrentLevel;
+        
         RaiseOnStatUpdated();
         return true;
     }
