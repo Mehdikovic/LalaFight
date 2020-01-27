@@ -156,7 +156,6 @@ public abstract class Weapon : MonoBehaviour
     private IEnumerator LoadAnimation(float angleFrom, float angleTo, bool loaded)
     {
         //TODO: grab this 5 value from player stat
-        //TODO: add some Scriptable to hold players important components and stats
         float speed = 2;
 
         float percent = 0f;
