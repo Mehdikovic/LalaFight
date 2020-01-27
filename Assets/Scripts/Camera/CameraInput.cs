@@ -41,7 +41,7 @@ public class CameraInput : MonoBehaviour
 
         if (_isPanning == true)
         {
-            //TODO: choose between one of them
+            //TODO: choose between one of them with PlayerPrefs
             //Vector3 pan = new Vector3(Input.GetAxisRaw("Mouse X"), 0f, Input.GetAxisRaw("Mouse Y")).normalized * Time.deltaTime;
             Vector3 pan = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized * Time.deltaTime;
             _cameraController.PanCamera(pan);

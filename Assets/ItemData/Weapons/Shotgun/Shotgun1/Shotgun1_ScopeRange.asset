@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f27366195506ac840b720c82b6fe3775, type: 3}
   m_Name: Shotgun1_ScopeRange
   m_EditorClassIdentifier: 
-  _defaultValue: 15
+  _defaultValue: 20
   _values: []
