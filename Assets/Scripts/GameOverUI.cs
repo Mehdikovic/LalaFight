@@ -9,27 +9,22 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] private GameObject _UIObject = null;
     [SerializeField] private Transform _player = null;
 
-    //TODO : Remember we disable PlayerInput Update
-    //private PlayerInput _playerInput;
-
     private void Awake()
     {
-        //_playerInput = _player.GetComponent<PlayerInput>();
-
         ChangeUIActive(false);
-
         _player.GetComponent<HealthController>().OnDeath += OnPlayerDeath;
         _player.GetComponent<PlayerController>().OnPlayerFall += OnPlayerDeath;
     }
 
+    //EVENT- CALLED BY BUTTON IN GameOverCanvas
     private void OnStartNewGameButtonClick()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
     }
 
     private void OnPlayerDeath()
     {
-        //Destroy(_playerInput);
         _screenImage.gameObject.SetActive(true);
         StartCoroutine(ScreenFadeIn(Color.clear, Color.black, 1f));
     }
@@ -47,6 +42,7 @@ public class GameOverUI : MonoBehaviour
 
         _UIObject.SetActive(true);
         Cursor.visible = true;
+        Time.timeScale = 0;
     }
 
     private void ChangeUIActive(bool active)
