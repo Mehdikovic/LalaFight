@@ -23,8 +23,7 @@ public abstract class Weapon : MonoBehaviour
     private Dictionary<LockType, bool> _locks;
 
     private Transform _playerOwner = null;
-    private AmmunationInventory _ammoInventory = null;
-    
+    //TODO: add Ammunation Inventory
 
     //TODO: add equipment manager to modifying the stats' values
     //GETTERS AND SETTERS
@@ -60,9 +59,6 @@ public abstract class Weapon : MonoBehaviour
                 { LockType.Magazine, false },
                 { LockType.Equipment, false },
         };
-        
-        //TODO: Create ScriptleObject for holding data and level-ups
-        //SetProperties(currentWeaponData);
     }
 
     //TODO: delete this test
@@ -160,6 +156,7 @@ public abstract class Weapon : MonoBehaviour
     private IEnumerator LoadAnimation(float angleFrom, float angleTo, bool loaded)
     {
         //TODO: grab this 5 value from player stat
+        //TODO: add some Scriptable to hold players important components and stats
         float speed = 2;
 
         float percent = 0f;
@@ -177,11 +174,6 @@ public abstract class Weapon : MonoBehaviour
     public void SetOwner(Transform owner)
     {
         _playerOwner = owner;
-    }
-
-    public void SetAmmoInventory(AmmunationInventory ammunationInventory)
-    {
-        _ammoInventory = ammunationInventory;
     }
 
     protected void CreateBullet(float rotation = 0)

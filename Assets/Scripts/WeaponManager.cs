@@ -36,7 +36,6 @@ public class WeaponManager : MonoBehaviour
         {
             var weapon = Instantiate(_pistolStartGun, _weaponHolder.position, _weaponHolder.rotation, _weaponHolder);
             weapon.SetOwner(transform);
-            weapon.SetAmmoInventory(_ammunationInventory);
             
             _weapons.Add(weapon);
             weapon.FastLoad(_isWeaponHided);
@@ -53,7 +52,6 @@ public class WeaponManager : MonoBehaviour
                     continue;
                 var weapon = Instantiate(_otherStartGun[i], _weaponHolder.position, _weaponHolder.rotation, _weaponHolder);
                 weapon.SetOwner(transform);
-                weapon.SetAmmoInventory(_ammunationInventory);
 
                 _weapons.Add(weapon);
                 weapon.FastUnload();
@@ -136,7 +134,6 @@ public class WeaponManager : MonoBehaviour
             
             _weapons[0] = newWeapon;
             newWeapon.SetOwner(transform);
-            newWeapon.SetAmmoInventory(_ammunationInventory);
             
             if (_currentWeaponIndex == 0)
             {
@@ -158,14 +155,12 @@ public class WeaponManager : MonoBehaviour
             _weapons[_currentWeaponIndex] = newWeapon;
             _weapons[_currentWeaponIndex].OnWeaponLoad(_isWeaponHided);
             newWeapon.SetOwner(transform);
-            newWeapon.SetAmmoInventory(_ammunationInventory);
             WeaponAdded?.Invoke();
             return oldWeapon;
         }
 
         _weapons.Add(newWeapon);
         newWeapon.SetOwner(transform);
-        newWeapon.SetAmmoInventory(_ammunationInventory);
         WeaponAdded?.Invoke();
         return null;
     }
