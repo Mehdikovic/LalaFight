@@ -7,7 +7,8 @@ public partial class Spawner : MonoBehaviour
     //[Header("Player Prefab")]
     //[SerializeField] private Transform _playerPrefab = null;
 
-    
+    [Header("MapGenerator")]
+    [SerializeField] private MapGenerator _mapGenerator = null;
 
     [Header("Enemy Prefabs")]
     [SerializeField] private Enemy _lightEnemyPrefab = null;
@@ -36,22 +37,27 @@ public partial class Spawner : MonoBehaviour
     private void Awake()
     {
         _playerTransform = FindObjectOfType<PlayerController>()?.transform;
-        
-        if (_playerTransform == null) 
-            gameObject.SetActive(false);
-        
-        MapGenerator.Instance.OnValidPlayerPosition += RespawnPlayer;
-        OnNextWave += MapGenerator.Instance.BeginNewMapGeneration;
-
     }
 
-    private void Start()
+    private void OnEnable()
     {
+        if (_playerTransform == null)
+            gameObject.SetActive(false);
+        
+        _mapGenerator.OnValidPlayerPosition += RespawnPlayer;
+        OnNextWave += _mapGenerator.BeginNewMapGeneration;
+
+        
         _nextCampingTime = Time.time + _timebetweenCamping;
         _oldPosition = _playerTransform.position;
 
         if (_waves.Count > 0)
             NextWave();
+    }
+
+    private void OnDisable()
+    {
+        _mapGenerator.OnValidPlayerPosition -= RespawnPlayer;
     }
 
     private void Update()
@@ -96,9 +102,9 @@ public partial class Spawner : MonoBehaviour
         
         Transform tileTransform;
         if (_isCamping)
-            tileTransform = MapGenerator.Instance.GetTileFromPosition(_playerTransform.position);
+            tileTransform = _mapGenerator.GetTileFromPosition(_playerTransform.position);
         else
-            tileTransform = MapGenerator.Instance.GetRandomOpenTile();
+            tileTransform = _mapGenerator.GetRandomOpenTile();
 
         Material tileMaterial = tileTransform.GetComponent<Renderer>().material;
         Color originalColor = tileMaterial.color;

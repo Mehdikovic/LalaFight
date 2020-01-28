@@ -37,16 +37,6 @@ public class MapGenerator : MonoBehaviour
     public Action OnMapGenerated;
     public Action<Vector3> OnValidPlayerPosition;
 
-    #region SINGLETON
-    static private MapGenerator _instance = null;
-    static public MapGenerator Instance => _instance ? _instance : GameObject.FindObjectOfType<MapGenerator>();
-    #endregion
-
-    private void Awake()
-    {
-        //AssembleMapGeneration();
-    }
-
     public void AssembleMapGeneration()
     {
         _navMeshSurface = GetComponent<NavMeshSurface>();
