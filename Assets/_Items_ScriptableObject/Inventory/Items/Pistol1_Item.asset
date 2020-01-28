@@ -10,7 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef98d93a00679d145a2bee8537a2b127, type: 3}
-  m_Name: Rifle1_Item
+  m_Name: Pistol1_Item
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6276633525519828528, guid: 233550796af7a0043b3084914d643013, type: 3}
-  GFX: {fileID: 3040526196803157135, guid: 5f2ecfb1854ec9445828331f0e0da24d, type: 3}
+  prefab: {fileID: 6276633525519828528, guid: 58d39a154c496e14cb74f07963783715, type: 3}

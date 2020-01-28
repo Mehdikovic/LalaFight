@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(AmmunationInventory))]
 public class WeaponManager : MonoBehaviour
 {
     [Range(1, 4)]
@@ -17,7 +16,6 @@ public class WeaponManager : MonoBehaviour
 
     private List<Weapon> _weapons = new List<Weapon>();
     private int _currentWeaponIndex = 0;
-    private AmmunationInventory _ammunationInventory;
     private bool _isWeaponHided = false;
 
     public event Action WeaponSwapped;
@@ -29,9 +27,6 @@ public class WeaponManager : MonoBehaviour
 
     private void Awake()
     {
-        _ammunationInventory = GetComponent<AmmunationInventory>();
-        _ammunationInventory.Init();
-        
         if (_pistolStartGun != null)
         {
             var weapon = Instantiate(_pistolStartGun, _weaponHolder.position, _weaponHolder.rotation, _weaponHolder);
