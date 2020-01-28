@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Inventory/InventoryItem")]
-public class InventoryItem : ScriptableObject
+
+public abstract class InventoryItem : ScriptableObject
 {
-    public GameObject prefab;
+    public string itemName = null;
+    public Sprite icon = null;
+
+    public abstract void Use();
 }

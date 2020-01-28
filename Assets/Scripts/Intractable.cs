@@ -3,6 +3,5 @@
 public class Intractable : MonoBehaviour
 {
     [SerializeField] protected string _message = null;
-    protected virtual void Awake() { }
-    public virtual void Use(PlayerController _player) { }
+    public virtual void Use(Transform _player) { }
 }

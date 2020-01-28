@@ -57,6 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa64c1f19741d31498329d3f0fa79dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timeBetweenIntract: 0.5
 --- !u!1 &396067772255135066
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +284,6 @@ GameObject:
   - component: {fileID: 2252849774192991534}
   - component: {fileID: 3754911042037574940}
   - component: {fileID: 2252849774192991536}
-  - component: {fileID: 1252796972}
   - component: {fileID: 4746143785221116086}
   - component: {fileID: 551463621}
   - component: {fileID: 2921984364377958038}
@@ -458,22 +458,6 @@ MonoBehaviour:
   _otherStartGun:
   - {fileID: 1609277850915519537, guid: 067c8a6b349d8c542967dca5470b0ccd, type: 3}
   - {fileID: 2490325649292596324, guid: 233550796af7a0043b3084914d643013, type: 3}
---- !u!114 &1252796972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2252849774192991528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e8c3475224cf9d418f74af3afda25a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startingPistolAmmo: 120
-  _startingSMGAmmo: 120
-  _startingShotgunAmmo: 35
-  _startingRifleAmmo: 90
 --- !u!114 &4746143785221116086
 MonoBehaviour:
   m_ObjectHideFlags: 0

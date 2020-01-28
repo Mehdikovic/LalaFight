@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b802e770360f71489f3140d39343637, type: 3}
-  m_Name: Rifle1_Item
+  m_Name: Shotgun1_Item
   m_EditorClassIdentifier: 
-  itemName: Rifle
+  itemName: Shotgun
   icon: {fileID: 0}
-  prefab: {fileID: 6276633525519828528, guid: 233550796af7a0043b3084914d643013, type: 3}
+  prefab: {fileID: 6276633525519828528, guid: 067c8a6b349d8c542967dca5470b0ccd, type: 3}

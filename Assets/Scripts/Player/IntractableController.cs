@@ -7,15 +7,10 @@ public class IntractableController : MonoBehaviour
 
     private float _intractTimer = 0;
     
-    private PlayerController _playerController;
 
     //private Collider[] _colliders = new Collider[4];
 
     private Stack<Collider> _colliders = new Stack<Collider>();
-    private void Awake()
-    {
-        _playerController = GetComponentInParent<PlayerController>();
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -47,7 +42,7 @@ public class IntractableController : MonoBehaviour
             while (_colliders.Count > 0)
             {
                 Intractable intractable = _colliders.Pop().GetComponent<Intractable>();
-                intractable.Use(_playerController);
+                intractable.Use(transform);
             }
         }
     }
