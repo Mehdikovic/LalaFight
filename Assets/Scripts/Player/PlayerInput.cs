@@ -9,6 +9,8 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private LayerMask _enemyLayerMask = new LayerMask();
 
+    [SerializeField] private IntractableController _intractableController = null;
+    
     private Camera _camera = null;
     private PlayerController _playerController;
     private WeaponManager _weaponManager;
@@ -70,7 +72,7 @@ public class PlayerInput : MonoBehaviour
 
         //Shooting - Control Weapon Update Method Here
         _weaponManager.CurrentWeaponTick();
-        
+        _intractableController.Tick();
 
 
         //Changing Weapon
