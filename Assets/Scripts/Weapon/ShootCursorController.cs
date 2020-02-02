@@ -10,21 +10,27 @@ public class ShootCursorController : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = false;
-
         Weapon weapon = GetComponentInParent<Weapon>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         
         weapon.OnWeaponLoaded += OnWeaponLoaded;
         weapon.OnWeaponUnloaded += OnWeaponUnloaded;
         weapon.OnCursorPositionReceived += SetCursorPosition;
+        weapon.OnOwnerChanged += OnOwnerChanged;
 
         _cameraTransform = CameraDatabase.MainCamera.transform;
         _centerPoint = transform.GetChild(0).gameObject;
         _centerPoint.SetActive(false);
 
         _spriteRenderer.sprite = _cursorImage;
+
+        if (weapon.playerOwner == null)
+            _spriteRenderer.enabled = false;
+    }
+
+    private void OnOwnerChanged(bool hasOwner)
+    {
+        _spriteRenderer.enabled = hasOwner;
     }
 
     private void OnWeaponUnloaded()

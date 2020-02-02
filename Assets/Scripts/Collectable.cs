@@ -5,6 +5,11 @@ public class Collectable : Interactable
     [SerializeField] private InventoryItem _inventoryItem = null;
     [SerializeField] private GameObject _parent = null;
 
+    private void OnEnable()
+    {
+        _inventoryItem.InitInSceneGFX(_parent.transform);
+    }
+
     public override void Interact(Transform _player)
     {
         print(_player.name + "  picked up " + _inventoryItem.itemName);

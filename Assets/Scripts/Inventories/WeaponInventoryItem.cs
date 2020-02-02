@@ -3,7 +3,12 @@
 [CreateAssetMenu(menuName = "Inventory/WeaponItem")]
 public class WeaponInventoryItem : InventoryItem
 {
-    public GameObject prefab;
+    public Weapon weaponPrefab;
+
+    public override void InitInSceneGFX(Transform parent)
+    {
+        Debug.Log("Init GFX called");
+    }
 
     public override void Use()
     {

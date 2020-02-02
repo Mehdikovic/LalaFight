@@ -42,8 +42,9 @@ public abstract class Weapon : MonoBehaviour
 
 
     public bool isAnimating => _isAnimating;
-    
+
     //EVENTS
+    public event Action<bool> OnOwnerChanged;
     public event Action OnFireLockRequested;
     public event Action OnFireBegin;
     public event Action OnFireEnd;
@@ -81,9 +82,6 @@ public abstract class Weapon : MonoBehaviour
         
         HandleShootInputs();
     }
-
-    
-
     public void SetLockValue(LockType lockType, bool value)
     {
         _locks[lockType] = value;
@@ -173,6 +171,7 @@ public abstract class Weapon : MonoBehaviour
     public void SetOwner(Transform owner)
     {
         _playerOwner = owner;
+        OnOwnerChanged?.Invoke(owner != null);
     }
 
     protected void CreateBullet(float rotation = 0)

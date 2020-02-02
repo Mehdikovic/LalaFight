@@ -135,8 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5274d034d0d3661488613d05e828ed78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _magazineSize: 13
-  _reloadTime: 0.8
 --- !u!114 &2554190672326961942
 MonoBehaviour:
   m_ObjectHideFlags: 0

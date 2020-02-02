@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Rifle
   icon: {fileID: 0}
-  prefab: {fileID: 6276633525519828528, guid: 233550796af7a0043b3084914d643013, type: 3}
+  weaponPrefab: {fileID: 2490325649292596324, guid: 233550796af7a0043b3084914d643013,
+    type: 3}

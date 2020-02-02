@@ -5,6 +5,9 @@ public class PlayerCursor : MonoBehaviour
     [SerializeField] private GameObject _playerCursor = null;
     void Awake()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = false;
+
         GetComponent<WeaponManager>().WeaponHideStateChanged += OnWeaponHideStateChanged;
         GetComponent<PlayerInput>().OnHitPointSet += OnHitPointSet;
         _playerCursor.SetActive(false);
