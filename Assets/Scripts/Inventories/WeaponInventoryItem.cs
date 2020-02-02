@@ -3,8 +3,8 @@
 [CreateAssetMenu(menuName = "Inventory/WeaponItem")]
 public class WeaponInventoryItem : InventoryItem
 {
+    [Header("Weapon Prefab")]
     public Weapon weaponPrefab;
-    public GameObject weaponGFXInScene;
 
     public override void InitGFXInScene(Collectable parent)
     {
