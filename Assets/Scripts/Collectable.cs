@@ -4,10 +4,16 @@ public class Collectable : Interactable
 {
     [SerializeField] private InventoryItem _inventoryItem = null;
 
-    //[ContextMenu("Init-Collectable")]
-    private void OnEnable()
+    [ContextMenu("Init Collectable")]
+    private void Init()
     {
         _inventoryItem.InitGFXInScene(this);
+    }
+
+    public void SetInventoryItem(InventoryItem newItem)
+    {
+        if (_inventoryItem == null)
+            _inventoryItem = newItem;
     }
 
     public override void Interact(Inventory _playerInventory)
