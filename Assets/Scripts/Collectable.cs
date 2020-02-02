@@ -3,17 +3,17 @@
 public class Collectable : Interactable
 {
     [SerializeField] private InventoryItem _inventoryItem = null;
-    [SerializeField] private GameObject _parent = null;
 
+    //[ContextMenu("Init-Collectable")]
     private void OnEnable()
     {
-        _inventoryItem.InitInSceneGFX(_parent.transform);
+        _inventoryItem.InitGFXInScene(this);
     }
 
-    public override void Interact(Transform _player)
+    public override void Interact(Inventory _playerInventory)
     {
-        print(_player.name + "  picked up " + _inventoryItem.itemName);
-        //TODO: add Item to player's Inventory
-        Destroy(_parent);
+        print(_playerInventory.name + "  picked up " + _inventoryItem.itemName);
+        _playerInventory.AddItem(_inventoryItem);
+        Destroy(gameObject);
     }
 }

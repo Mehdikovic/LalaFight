@@ -120,12 +120,12 @@ public class WeaponManager : MonoBehaviour
     public Weapon AddWeapon(Weapon newWeapon)
     {
         newWeapon.FastUnload();
+        SyncWeaponWithHolder(newWeapon);
 
         if (newWeapon.type == WeaponType.Pistol)
         {
             var oldWeapon = _weapons[0];
-            oldWeapon.OnWeaponUnload();
-            SyncWeaponWithHolder(newWeapon);
+            oldWeapon.FastUnload();
             
             _weapons[0] = newWeapon;
             newWeapon.SetOwner(transform);
@@ -145,8 +145,7 @@ public class WeaponManager : MonoBehaviour
                 return newWeapon;
             }
             var oldWeapon = _weapons[_currentWeaponIndex];
-            oldWeapon.OnWeaponUnload();
-            SyncWeaponWithHolder(newWeapon);
+            oldWeapon.FastUnload();
             _weapons[_currentWeaponIndex] = newWeapon;
             _weapons[_currentWeaponIndex].OnWeaponLoad(_isWeaponHided);
             newWeapon.SetOwner(transform);

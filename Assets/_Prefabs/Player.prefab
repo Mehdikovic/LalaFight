@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1081833101}
-  - component: {fileID: 5587591518038704156}
+  - component: {fileID: 2285310479472001705}
   - component: {fileID: 3478931037721575075}
   m_Layer: 8
   m_Name: IntractManager
@@ -30,21 +30,20 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2252849774192991532}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &5587591518038704156
-SphereCollider:
+--- !u!114 &2285310479472001705
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1081833100}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 1.2}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cfd1066ba80b7746b6e14513006b33c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3478931037721575075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,7 +56,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa64c1f19741d31498329d3f0fa79dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeBetweenIntract: 0.5
+  _interactableMask:
+    serializedVersion: 2
+    m_Bits: 256
+  _timeBetweenInteract: 0.25
+  _inventory: {fileID: 2285310479472001705}
 --- !u!1 &396067772255135066
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,7 +268,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2252849774192991532}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2252849774192991528
 GameObject:
@@ -305,9 +308,9 @@ Transform:
   m_LocalPosition: {x: 10, y: 4, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1081833101}
   - {fileID: 8282718254073576992}
   - {fileID: 2252849772987505164}
-  - {fileID: 1081833101}
   - {fileID: 727670672653850129}
   - {fileID: 8440500972058179582}
   - {fileID: 396067772255135070}
@@ -451,13 +454,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa84c4b843313ff46818d3b73a8e1225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _allowedWeaponNumber: 4
+  _allowedWeaponNumber: 3
   _weaponHolder: {fileID: 2252849772987505164}
   _pistolStartGun: {fileID: 4696563887833144946, guid: 58d39a154c496e14cb74f07963783715,
     type: 3}
-  _otherStartGun:
-  - {fileID: 1609277850915519537, guid: 067c8a6b349d8c542967dca5470b0ccd, type: 3}
-  - {fileID: 2490325649292596324, guid: 233550796af7a0043b3084914d643013, type: 3}
+  _otherStartGun: []
 --- !u!114 &4746143785221116086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1420,5 +1421,5 @@ Transform:
   - {fileID: 2318247649645101033}
   - {fileID: 4632901607209612711}
   m_Father: {fileID: 2252849774192991532}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

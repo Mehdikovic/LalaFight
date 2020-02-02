@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class MagazineController : MonoBehaviour, IMagazineController
 {
+	
+	[SerializeField] private Weapon _weapon = null;
+
 	private int _currentMagazine = 0;
     private bool _isReloading = false;
 
 	private Coroutine _reloadCoroutine;
 	private IntObject _ammo = new IntObject() { Value = 500 };
-	private Weapon _weapon;
 	
 	//EVENTS
 	public event Action NoAmmunationAtInventory;
@@ -28,13 +30,7 @@ public class MagazineController : MonoBehaviour, IMagazineController
 
     public bool isReloading => _isReloading;
 
-
-	private void Awake()
-	{
-		_weapon = GetComponent<Weapon>();
-	}
-
-
+	//UNITY CALLBACKS
 	private void OnEnable()
 	{
 		_weapon.OnReloadRequested += OnReloadRequested;

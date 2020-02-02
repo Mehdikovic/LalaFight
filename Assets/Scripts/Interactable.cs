@@ -3,5 +3,5 @@
 public class Interactable : MonoBehaviour
 {
     [SerializeField] protected string _message = null;
-    public virtual void Interact(Transform _player) { }
+    public virtual void Interact(Inventory _playerInventory) { }
 }

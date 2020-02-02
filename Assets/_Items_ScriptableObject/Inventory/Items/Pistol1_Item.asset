@@ -16,3 +16,5 @@ MonoBehaviour:
   icon: {fileID: 0}
   weaponPrefab: {fileID: 4696563887833144946, guid: 58d39a154c496e14cb74f07963783715,
     type: 3}
+  weaponGFXInScene: {fileID: 6072216516418926764, guid: 5de6269ec60f43e448ff842636acf1ed,
+    type: 3}

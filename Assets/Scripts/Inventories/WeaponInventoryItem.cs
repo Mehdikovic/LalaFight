@@ -4,14 +4,25 @@
 public class WeaponInventoryItem : InventoryItem
 {
     public Weapon weaponPrefab;
+    public GameObject weaponGFXInScene;
 
-    public override void InitInSceneGFX(Transform parent)
+    public override void InitGFXInScene(Collectable parent)
     {
-        Debug.Log("Init GFX called");
+        Instantiate(weaponGFXInScene, parent.transform.position, Quaternion.identity, parent.transform);
     }
 
-    public override void Use()
+    public override void Use(GameObject owner)
     {
-        Debug.Log("[USED]: " + name);
+        WeaponManager manager = owner.GetComponent<WeaponManager>();
+        if (manager == null)
+            return;
+        
+        var newWeapon = Instantiate(weaponPrefab, owner.transform);
+        var oldWeapon = manager.AddWeapon(newWeapon);
+
+        if (oldWeapon == null)
+            return;
+        
+        Destroy(oldWeapon.gameObject);
     }
 }
