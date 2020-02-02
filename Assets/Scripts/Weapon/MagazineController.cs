@@ -133,14 +133,4 @@ public class MagazineController : MonoBehaviour, IMagazineController
 		_weapon.OnFireEnd -= OnFireEnd;
 		_weapon.OnWeaponUnloaded -= OnWeaponUnloaded;
 	}
-
-	private void OnDestroy()
-	{
-		_weapon.SetLockValue(LockType.Magazine, false);
-		
-		_weapon.OnReloadRequested -= OnReloadRequested;
-		_weapon.OnFireLockRequested -= OnFireLockRequested;
-		_weapon.OnFireEnd -= OnFireEnd;
-		_weapon.OnWeaponUnloaded -= OnWeaponUnloaded;
-	}
 }
