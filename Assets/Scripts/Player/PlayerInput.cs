@@ -9,7 +9,7 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private LayerMask _enemyLayerMask = new LayerMask();
 
-    [SerializeField] private IntractableController _intractableController = null;
+    [SerializeField] private InteractableController _intractableController = null;
     
     private Camera _camera = null;
     private PlayerController _playerController;

@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class IntractableController : MonoBehaviour
+public class InteractableController : MonoBehaviour
 {
-    [SerializeField] private float _timeBetweenIntract = 2f;
+    [SerializeField] private float _timeBetweenInteract = 2f;
 
-    private float _intractTimer = 0;
+    private float _interactTimer = 0;
     
 
     //private Collider[] _colliders = new Collider[4];
-
+    //TODO: add SphereColision for pooling objects
     private Stack<Collider> _colliders = new Stack<Collider>();
 
     private void OnTriggerEnter(Collider other)
@@ -36,13 +36,13 @@ public class IntractableController : MonoBehaviour
 
     private void IntreactWith()
     {
-        if (_intractTimer < Time.time)
+        if (_interactTimer < Time.time)
         {
-            _intractTimer = Time.time + _timeBetweenIntract;
+            _interactTimer = Time.time + _timeBetweenInteract;
             while (_colliders.Count > 0)
             {
-                Intractable intractable = _colliders.Pop().GetComponent<Intractable>();
-                intractable.Use(transform);
+                Interactable intractable = _colliders.Pop().GetComponent<Interactable>();
+                intractable.Interact(transform);
             }
         }
     }

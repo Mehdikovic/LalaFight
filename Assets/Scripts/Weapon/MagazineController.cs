@@ -32,7 +32,11 @@ public class MagazineController : MonoBehaviour, IMagazineController
 	private void Awake()
 	{
 		_weapon = GetComponent<Weapon>();
-		
+	}
+
+
+	private void OnEnable()
+	{
 		_weapon.OnReloadRequested += OnReloadRequested;
 		_weapon.OnFireLockRequested += OnFireLockRequested;
 		_weapon.OnFireEnd += OnFireEnd;
@@ -118,6 +122,16 @@ public class MagazineController : MonoBehaviour, IMagazineController
 	private void DecreaseAmmo()
 	{
 		--_currentMagazine;
+	}
+
+	private void OnDisable()
+	{
+		_weapon.SetLockValue(LockType.Magazine, false);
+
+		_weapon.OnReloadRequested -= OnReloadRequested;
+		_weapon.OnFireLockRequested -= OnFireLockRequested;
+		_weapon.OnFireEnd -= OnFireEnd;
+		_weapon.OnWeaponUnloaded -= OnWeaponUnloaded;
 	}
 
 	private void OnDestroy()
