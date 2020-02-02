@@ -3,12 +3,15 @@ using UnityEngine;
 
 public class WeaponRecoilReloadAnimation : MonoBehaviour
 {
+    [Header("Weapon")]
+    [SerializeField] private Weapon _weapon = null;
+    
+    [Header("Kick Amount")]
     [Range(0.1f, 0.6f)]
     [SerializeField] float _kickback = 0.1f;
     [Range(0f, 10f)]
     [SerializeField] float _kickup = 10f;
 
-    private Weapon _weapon;
     private IMagazineController _magazine;
 
     private Vector3 _recoilPositionSmoothVelocity;
@@ -19,7 +22,6 @@ public class WeaponRecoilReloadAnimation : MonoBehaviour
 
     private void Awake()
     {
-        _weapon = GetComponent<Weapon>();
         _magazine = GetComponent<IMagazineController>() ?? new NullMagazine();
         _reloadTime = _magazine.reloadTime;
         
@@ -47,9 +49,12 @@ public class WeaponRecoilReloadAnimation : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (_weapon.isAnimating) return;
+        if (_weapon.isAnimating) 
+            return;
+        
         transform.localPosition = Vector3.SmoothDamp(transform.localPosition, Vector3.zero, ref _recoilPositionSmoothVelocity, 0.1f);
         _rotationAngleOverX = Mathf.SmoothDamp(_rotationAngleOverX, 0, ref _recoilRotationSmoothVelocity, 0.1f);
+        
         if (_isReloaded == false)
             transform.localEulerAngles = _rotationAngleOverX * Vector3.left;
         

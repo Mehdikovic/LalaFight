@@ -8,7 +8,9 @@ public class WeaponInventoryItem : InventoryItem
 
     public override void InitGFXInScene(Collectable parent)
     {
-        Instantiate(weaponGFXInScene, parent.transform.position, Quaternion.identity, parent.transform);
+        Quaternion rotation = Quaternion.AngleAxis(-90, Vector3.right);
+        
+        Instantiate(weaponGFXInScene, parent.transform.position.WithY(.2f), rotation, parent.transform);
     }
 
     public override void Use(GameObject owner)

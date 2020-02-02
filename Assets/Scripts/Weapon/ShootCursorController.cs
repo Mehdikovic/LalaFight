@@ -31,6 +31,7 @@ public class ShootCursorController : MonoBehaviour
     private void OnOwnerChanged(bool hasOwner)
     {
         _spriteRenderer.enabled = hasOwner;
+        _centerPoint.SetActive(hasOwner);
     }
 
     private void OnWeaponUnloaded()

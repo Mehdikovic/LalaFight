@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6276633525519828529}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 35.694}
 --- !u!1 &6276633525519828528
 GameObject:
@@ -63,9 +63,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3348655838904608954}
+  - {fileID: 6276633524672555150}
   - {fileID: 8127974939429277432}
   - {fileID: 5185985126009107903}
-  - {fileID: 6276633524672555150}
   - {fileID: 8277424803223349617}
   - {fileID: 3528406664474560428}
   m_Father: {fileID: 0}
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332d42dca72501d47913a3c726a5b474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modelName: m9
+  _modelName: Pistol1
   _type: 0
   _bulletType: 0
   _muzzle: {fileID: 3348655838904608954}
@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5da07881491b244eb5c27d1e93be1c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weapon: {fileID: 4696563887833144946}
   _shellSpawnerPoint: {fileID: 8127974939429277432}
   _bulletShellPrefab: {fileID: -7429665437862226360, guid: 0cb556c566ae8954685ad18bcdf67d8d,
     type: 3}
@@ -149,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d111e9de7ef4a46885a2d941614777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weapon: {fileID: 4696563887833144946}
   _kickback: 0.1
   _kickup: 2
 --- !u!1 &6851352011867050801
@@ -179,7 +181,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6276633525519828529}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 13.976001, y: 0, z: -70}
 --- !u!1001 &243137550666076193
 PrefabInstance:
@@ -231,7 +233,7 @@ PrefabInstance:
     - target: {fileID: 6072216516418926767, guid: 5de6269ec60f43e448ff842636acf1ed,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6072216516418926767, guid: 5de6269ec60f43e448ff842636acf1ed,
         type: 3}

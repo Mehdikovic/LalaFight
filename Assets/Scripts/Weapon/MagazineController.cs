@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class MagazineController : MonoBehaviour, IMagazineController
 {
-	
+
+	[Header("Weapon")]
 	[SerializeField] private Weapon _weapon = null;
 
 	private int _currentMagazine = 0;

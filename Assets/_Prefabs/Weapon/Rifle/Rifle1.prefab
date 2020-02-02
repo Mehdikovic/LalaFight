@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 606528233175219525}
   - component: {fileID: 5301561167701575732}
   m_Layer: 0
-  m_Name: M4A1
+  m_Name: Rifle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332d42dca72501d47913a3c726a5b474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modelName: m4a1
+  _modelName: Rifle1
   _type: 3
   _bulletType: 1
   _muzzle: {fileID: 6294185648442981164}
@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5da07881491b244eb5c27d1e93be1c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weapon: {fileID: 2490325649292596324}
   _shellSpawnerPoint: {fileID: 6635740821411073850}
   _bulletShellPrefab: {fileID: -7429665437862226360, guid: 0cb556c566ae8954685ad18bcdf67d8d,
     type: 3}
@@ -179,6 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d111e9de7ef4a46885a2d941614777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weapon: {fileID: 2490325649292596324}
   _kickback: 0.3
   _kickup: 8
 --- !u!1001 &1637192308324068493

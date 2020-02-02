@@ -12,9 +12,17 @@ public class Collectable : Interactable
 
     public override void Interact(Inventory _playerInventory)
     {
-        print(_playerInventory.name + "  picked up " + _inventoryItem.itemName);
+        
         bool isAdded = _playerInventory.AddItem(_inventoryItem);
+        
         if (isAdded)
+        {
+            print(_playerInventory.name + "  picked up " + _inventoryItem.itemName);
             Destroy(gameObject);
+        }
+        else
+        {
+            print("Didn't add to inventory");
+        }
     }
 }

@@ -2,6 +2,9 @@
 
 public class WeaponVFXManager : MonoBehaviour
 {
+    [Header("Weapon")]
+    [SerializeField] private Weapon _weapon = null;
+    
     [Header("Shell")]
     [SerializeField] private Transform _shellSpawnerPoint = null;
     [SerializeField] private BulletShellVFX _bulletShellPrefab = null;
@@ -10,12 +13,11 @@ public class WeaponVFXManager : MonoBehaviour
     [SerializeField] private Transform _clipSpawnerPoint = null;
     [SerializeField] private GameObject _clipPrefab = null;
 
-    private Weapon _weapon = null;
+ 
     private IMagazineController _magazine = null;
 
     private void Awake()
     {
-        _weapon = GetComponent<Weapon>();
         _magazine = GetComponent<IMagazineController>() ?? new NullMagazine();
         
         _weapon.OnFireEnd += OnWeaponFire;

@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: -6225766851099108219}
   - component: {fileID: 6860827392780125165}
   - component: {fileID: -3304807965546575139}
+  - component: {fileID: 202032892059803818}
   m_Layer: 0
   m_Name: Shotgun1
   m_TagString: Untagged
@@ -114,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5da07881491b244eb5c27d1e93be1c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weapon: {fileID: 1609277850915519537}
   _shellSpawnerPoint: {fileID: 2401478863899412883}
   _bulletShellPrefab: {fileID: -7429665437862226360, guid: 0cb556c566ae8954685ad18bcdf67d8d,
     type: 3}
@@ -135,6 +137,21 @@ MonoBehaviour:
   _UIparent: {fileID: 1725900399968794570}
   _timerImage: {fileID: 1725900401789786481}
   _timerText: {fileID: 1725900401808985519}
+--- !u!114 &202032892059803818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6276633525519828528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79d111e9de7ef4a46885a2d941614777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weapon: {fileID: 1609277850915519537}
+  _kickback: 0.5
+  _kickup: 10
 --- !u!1 &6335553889010369717
 GameObject:
   m_ObjectHideFlags: 0
