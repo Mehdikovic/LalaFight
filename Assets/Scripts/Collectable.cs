@@ -18,7 +18,6 @@ public class Collectable : Interactable
 
     public override void Interact(Inventory _playerInventory)
     {
-        
         bool isAdded = _playerInventory.AddItem(_inventoryItem);
         
         if (isAdded)
