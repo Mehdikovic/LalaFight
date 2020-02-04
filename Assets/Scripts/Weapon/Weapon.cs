@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public enum LockType { Magazine, Equipment }
 
 public abstract class Weapon : MonoBehaviour
 {
@@ -17,11 +14,10 @@ public abstract class Weapon : MonoBehaviour
 
     [Header("Weapon Stat[Single | Multiple]")]
     [SerializeField] protected WeaponStats _stats = null;
-    
+
     private float _nextShootingTime = 0f;
     private bool _isAnimating = false;
-    private Dictionary<LockType, bool> _locks;
-
+    private IMagazineController _magazine = null;
     private Transform _playerOwner = null;
     //TODO: add Ammunation Inventory
 
@@ -31,6 +27,7 @@ public abstract class Weapon : MonoBehaviour
     public WeaponType type => _type;
     public BulletType bulletType => _bulletType;
     public Transform playerOwner => _playerOwner;
+    public IMagazineController magazine => _magazine;
 
     public float accuracy => _stats.accuracy.value;
     public int damage => _stats.damage.value;
@@ -40,15 +37,12 @@ public abstract class Weapon : MonoBehaviour
     public float reloadTime => _stats.reloadTime.value;
     public float scopeRange => _stats.scopeRange.value;
 
-
     public bool isAnimating => _isAnimating;
 
     //EVENTS
     public event Action<bool> OnOwnerChanged;
-    public event Action OnFireLockRequested;
     public event Action OnFireBegin;
     public event Action OnFireEnd;
-    public event Action OnReloadRequested;
     public event Action OnWeaponLoaded;
     public event Action OnWeaponUnloaded;
     public event Action<Vector3, bool> OnCursorPositionReceived;
@@ -56,10 +50,9 @@ public abstract class Weapon : MonoBehaviour
     // UNITY CALLBACKS
     protected virtual void Awake()
     {
-        _locks = new Dictionary<LockType, bool>() {
-                { LockType.Magazine, false },
-                { LockType.Equipment, false },
-        };
+        _magazine = GetComponent<IMagazineController>() ?? new NullMagazine();
+        //TODO: delete this
+        SetInitialMagazine(12);
     }
 
     //TODO: delete this test
@@ -78,40 +71,30 @@ public abstract class Weapon : MonoBehaviour
     public virtual void HandleUpdateInputs()
     {
         if (Input.GetButtonDown("Reload"))
-            OnReloadRequested?.Invoke();
-        
+            _magazine.Reload();
+
         HandleShootInputs();
-    }
-    public void SetLockValue(LockType lockType, bool value)
-    {
-        _locks[lockType] = value;
-    }
-
-    private bool IsWeaponLocked()
-    {
-        if (OnFireLockRequested == null)
-            return false;
-
-        bool result = false;
-        
-        foreach (var item in _locks.Keys)
-            result |= _locks[item];
-        
-        return result;
     }
 
     protected void RaiseOnFiredBeginEvent()
     {
-        OnFireLockRequested?.Invoke();
         OnFireBegin?.Invoke();
     }
+
     protected void RaiseOnFiredEndEvent() => OnFireEnd?.Invoke();
-    protected bool CanShoot() => IsWeaponLocked() == false && _isAnimating == false && Time.time > _nextShootingTime;
+
+    protected bool CanShoot() => _magazine.ShootingAllowed() && _isAnimating == false && Time.time > _nextShootingTime;
+
     protected void NextShootingTime() => _nextShootingTime = Time.time + fireRate;
-    
+
     public void SetShootCursorPosition(Vector3 hitPoint, bool aimOnEnemy)
     {
         OnCursorPositionReceived?.Invoke(hitPoint, aimOnEnemy);
+    }
+
+    public void SetInitialMagazine(int amount)
+    {
+        _magazine.SetCurrentMagazine(amount);
     }
 
     public virtual void FastLoad(bool _isWeaponHided)
@@ -123,32 +106,36 @@ public abstract class Weapon : MonoBehaviour
 
     public virtual void FastUnload()
     {
+        _magazine.CancelReloading();
         OnWeaponLoaded?.Invoke();
+        
         gameObject.SetActive(false);
     }
 
-    public virtual void OnWeaponLoad(bool _isWeaponHided)
+    public virtual void OnWeaponLoad()
     {
-        if (_isAnimating == true) return;
-        
+        if (_isAnimating == true) 
+            return;
+
         _isAnimating = true;
         gameObject.SetActive(true);
-        
+
         OnWeaponLoaded?.Invoke();
-        StartCoroutine(LoadAnimation(60, 0, true));
         
-        gameObject.SetActive(!_isWeaponHided);
+        StartCoroutine(LoadAnimation(60, 0, true));
     }
 
     public virtual void OnWeaponUnload()
     {
-        if (_isAnimating == true) return;
-        
+        if (_isAnimating == true) 
+            return;
+
         _isAnimating = true;
         
+        _magazine.CancelReloading();
         OnWeaponUnloaded?.Invoke();
-        StartCoroutine(LoadAnimation(0, 60, false));
         
+        StartCoroutine(LoadAnimation(0, 60, false));
     }
 
     private IEnumerator LoadAnimation(float angleFrom, float angleTo, bool loaded)
@@ -157,7 +144,7 @@ public abstract class Weapon : MonoBehaviour
         float speed = 2;
 
         float percent = 0f;
-        while(percent < 1)
+        while (percent < 1)
         {
             percent += Time.deltaTime * speed;
             transform.localEulerAngles = Vector3.right * Mathf.Lerp(angleFrom, angleTo, percent);

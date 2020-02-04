@@ -51,9 +51,11 @@ public class SingleProjectileWeapon : Weapon
 
     private void Shoot()
     {
-        RaiseOnFiredBeginEvent();
+        
         if (CanShoot())
         {
+            RaiseOnFiredBeginEvent();
+
             if (CurrentFireMode == FireModeType.Burst)
             {
                 if (_burstRemainingShoot == 0)
@@ -66,8 +68,10 @@ public class SingleProjectileWeapon : Weapon
                     return;
             }
 
-            NextShootingTime();
             CreateBullet();
+            NextShootingTime();
+            magazine.DecreaseAmmo();
+            
             RaiseOnFiredEndEvent();
         }
     }

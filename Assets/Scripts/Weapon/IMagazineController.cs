@@ -10,4 +10,10 @@
     float reloadTime { get; }
     int currentMagazine { get; }
     bool isReloading { get; }
+
+    void SetCurrentMagazine(int amount);
+    bool ShootingAllowed();
+    void CancelReloading();
+    void DecreaseAmmo();
+    void Reload();
 }

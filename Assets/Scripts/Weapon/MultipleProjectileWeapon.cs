@@ -24,12 +24,17 @@ public class MultipleProjectileWeapon : Weapon
 
     private void Shoot()
     {
-        RaiseOnFiredBeginEvent();
+        
         if (CanShoot())
         {
-            NextShootingTime();
+            RaiseOnFiredBeginEvent();
+            
             for (int i = 0; i < shots.Length; ++i)
                 CreateBullet(shots[i] * 10);
+            
+            NextShootingTime();
+            magazine.DecreaseAmmo();
+
             RaiseOnFiredEndEvent();
         }
     }

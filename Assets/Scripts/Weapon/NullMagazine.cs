@@ -15,4 +15,29 @@
     public int currentMagazine => -1;
 
     public bool isReloading => false;
+
+    public void SetCurrentMagazine(int amount)
+    {
+        
+    }
+
+    public bool ShootingAllowed()
+    {
+        return true;
+    }
+
+    public void CancelReloading()
+    {
+        
+    }
+
+    public void DecreaseAmmo()
+    {
+        
+    }
+
+    public void Reload()
+    {
+        
+    }
 }

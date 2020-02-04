@@ -21,7 +21,7 @@ public class MeleeAttack : MonoBehaviour
 
     private WeaponManager _weaponManager;
     private float _meleeAttackTime;
-    private Vector3 _boxSize; //Vector3.one * 2 + Vector3.forward * 0.5f + Vector3.right;
+    private Vector3 _boxSize;
 
     public event Action Attacked;
 
@@ -34,10 +34,10 @@ public class MeleeAttack : MonoBehaviour
 
     public void Attack()
     {
-        if (Time.time > _meleeAttackTime)
+        if (Time.time > _meleeAttackTime && _weaponManager.isWeaponAnimating == false)
         {
             _meleeAttackTime = Time.time + _attackRate;
-            _weaponManager.HideWeapon();
+            _weaponManager.HideWeapon(true);
             StartCoroutine(MeleeAttackAnimation());
         }
     }
@@ -59,7 +59,7 @@ public class MeleeAttack : MonoBehaviour
         }
 
         _meleeAttackWeapon.gameObject.SetActive(false);
-        _weaponManager.ShowWeapon();
+        _weaponManager.ShowWeapon(true);
         Attacked?.Invoke();
     }
 

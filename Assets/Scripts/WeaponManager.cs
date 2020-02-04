@@ -17,6 +17,7 @@ public class WeaponManager : MonoBehaviour
     private List<Weapon> _weapons = new List<Weapon>();
     private int _currentWeaponIndex = 0;
     private bool _isWeaponHided = false;
+    
 
     public event Action WeaponSwapped;
     public event Action WeaponAdded;
@@ -24,6 +25,7 @@ public class WeaponManager : MonoBehaviour
     
     public Weapon currentWeapon => _weapons[_currentWeaponIndex];
     public bool isWeaponHided => _isWeaponHided;
+    public bool isWeaponAnimating => currentWeapon.isAnimating;
 
     private void Awake()
     {
@@ -77,7 +79,7 @@ public class WeaponManager : MonoBehaviour
             if (oldCurrentWeaponIndex == _currentWeaponIndex)
                 return;
             _weapons[oldCurrentWeaponIndex].OnWeaponUnload();
-            _weapons[_currentWeaponIndex].OnWeaponLoad(_isWeaponHided);
+            _weapons[_currentWeaponIndex].OnWeaponLoad();
             WeaponSwapped?.Invoke();
         }
     }
@@ -92,21 +94,33 @@ public class WeaponManager : MonoBehaviour
             ShowWeapon();
     }
 
-    public void ShowWeapon()
+    public void ShowWeapon(bool fastLoad = false)
     {
-        if (_isWeaponHided == false || currentWeapon.isAnimating == true) return;
+        if (_isWeaponHided == false || currentWeapon.isAnimating == true) 
+            return;
         
         _isWeaponHided = false;
-        currentWeapon.OnWeaponLoad(_isWeaponHided);
+        
+        if (fastLoad == true)
+            currentWeapon.FastLoad(_isWeaponHided);
+        else
+            currentWeapon.OnWeaponLoad();
+        
         WeaponHideStateChanged?.Invoke(_isWeaponHided);
     }
 
-    public void HideWeapon()
+    public void HideWeapon(bool fastUnload = false)
     {
-        if (_isWeaponHided == true || currentWeapon.isAnimating == true) return;
+        if (_isWeaponHided == true || currentWeapon.isAnimating == true) 
+            return;
 
         _isWeaponHided = true;
-        currentWeapon.OnWeaponUnload();
+
+        if (fastUnload == true)
+            currentWeapon.FastUnload();
+        else
+            currentWeapon.OnWeaponUnload();
+
         WeaponHideStateChanged?.Invoke(_isWeaponHided);
     }
 
@@ -132,7 +146,7 @@ public class WeaponManager : MonoBehaviour
             
             if (_currentWeaponIndex == 0)
             {
-                _weapons[0].OnWeaponLoad(_isWeaponHided);
+                _weapons[0].OnWeaponLoad();
             }
             WeaponAdded?.Invoke();
             return oldWeapon;
@@ -147,7 +161,7 @@ public class WeaponManager : MonoBehaviour
             var oldWeapon = _weapons[_currentWeaponIndex];
             oldWeapon.FastUnload();
             _weapons[_currentWeaponIndex] = newWeapon;
-            _weapons[_currentWeaponIndex].OnWeaponLoad(_isWeaponHided);
+            _weapons[_currentWeaponIndex].OnWeaponLoad();
             newWeapon.SetOwner(transform);
             WeaponAdded?.Invoke();
             return oldWeapon;
