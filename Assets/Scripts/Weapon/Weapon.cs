@@ -76,7 +76,7 @@ public abstract class Weapon : MonoBehaviour
     public virtual void HandleUpdateInputs()
     {
         if (Input.GetButtonDown("Reload"))
-            _magazine.Reload();
+            magazine.Reload();
 
         HandleShootInputs();
     }
@@ -88,7 +88,7 @@ public abstract class Weapon : MonoBehaviour
 
     protected void RaiseOnFiredEndEvent() => OnFireEnd?.Invoke();
 
-    protected bool CanShoot() => _magazine.ShootingAllowed() && _isAnimating == false && Time.time > _nextShootingTime;
+    protected bool CanShoot() => magazine.ShootingAllowed() && _isAnimating == false && Time.time > _nextShootingTime;
 
     protected void NextShootingTime() => _nextShootingTime = Time.time + fireRate;
 
@@ -116,7 +116,7 @@ public abstract class Weapon : MonoBehaviour
 
     public virtual void FastUnload()
     {
-        _magazine.CancelReloading();
+        magazine.CancelReloading();
         OnWeaponLoaded?.Invoke();
 
         gameObject.SetActive(false);
@@ -142,7 +142,7 @@ public abstract class Weapon : MonoBehaviour
 
         _isAnimating = true;
 
-        _magazine.CancelReloading();
+        magazine.CancelReloading();
         OnWeaponUnloaded?.Invoke();
 
         StartCoroutine(LoadAnimation(0, 60, false));
