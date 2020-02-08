@@ -9,13 +9,12 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private LayerMask _enemyLayerMask = new LayerMask();
 
-    [SerializeField] private InteractableController _intractableController = null;
-    
-    private Camera _camera = null;
+    private Camera _camera;
     private PlayerController _playerController;
     private WeaponManager _weaponManager;
     private CameraInput _cameraInput;
     private MeleeAttack _meleeAttack;
+    private InteractableController _intractableController;
 
 
     private Plane _plane;
@@ -30,6 +29,7 @@ public class PlayerInput : MonoBehaviour
         _meleeAttack = GetComponent<MeleeAttack>();
         _weaponManager = GetComponent<WeaponManager>();
         _cameraInput = _camera.GetComponent<CameraInput>();
+        _intractableController = GetComponent<InteractableController>();
         _plane = new Plane(Vector3.up, Vector3.up);
     }
 

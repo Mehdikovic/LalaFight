@@ -8,12 +8,15 @@ public class WeaponManager : MonoBehaviour
     [Range(1, 4)]
     [SerializeField] private int _allowedWeaponNumber = 3;
     [SerializeField] private Transform _weaponHolder = null;
-    
+
+    [Header("Weapon Inventory")]
+    [SerializeField] private WeaponInventory _inventory = null;
+
     [Header("Starting Guns")]
     [SerializeField] private Weapon _pistolStartGun = null;
     [SerializeField] private Weapon[] _otherStartGun = null;
 
-
+    
     private List<Weapon> _weapons = new List<Weapon>();
     private int _currentWeaponIndex = 0;
     private bool _isWeaponHided = false;
@@ -26,6 +29,8 @@ public class WeaponManager : MonoBehaviour
     public Weapon currentWeapon => _weapons[_currentWeaponIndex];
     public bool isWeaponHided => _isWeaponHided;
     public bool isWeaponAnimating => currentWeapon.isAnimating;
+
+    public WeaponInventory Inventory => _inventory;
 
     private void Awake()
     {

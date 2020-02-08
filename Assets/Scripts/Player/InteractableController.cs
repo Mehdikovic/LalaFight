@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InteractableController : MonoBehaviour
 {
     [Header("Interact")]
     [SerializeField] private LayerMask _interactableMask = new LayerMask();
-    [SerializeField] private float _timeBetweenInteract = 2f;
+    [SerializeField] private float _timeBetweenInteract = 0.2f;
     
-    [Header("Player Inventory")]
-    [SerializeField] private Inventory _inventory = null;
-
     private float _interactTimer = 0;
     private Vector3 _position = Vector3.zero;
     private float _radius = 2f;
@@ -30,7 +26,7 @@ public class InteractableController : MonoBehaviour
 
             var colliders = Physics.OverlapSphere(_position, _radius, _interactableMask, QueryTriggerInteraction.Collide);
             if (colliders.Length > 0)
-                colliders[0].GetComponent<Interactable>().Interact(_inventory);
+                colliders[0].GetComponent<Interactable>().Interact(transform);
         }
     }
 }
