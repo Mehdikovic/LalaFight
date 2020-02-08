@@ -7,7 +7,6 @@ public class MagazineController : MonoBehaviour, IMagazineController, IOnObjectN
 {
     private Weapon _weapon = null;
 
-    private int _currentMagazine = 0;
     private bool _isReloading = false;
 
     private Coroutine _reloadCoroutine;
@@ -25,7 +24,7 @@ public class MagazineController : MonoBehaviour, IMagazineController, IOnObjectN
 
     public float reloadTime => _weapon.reloadTime;
 
-    public int currentMagazine => _currentMagazine;
+    public int currentMagazine => _weapon.magazieSize;
 
     public bool isReloading => _isReloading;
 
@@ -33,13 +32,11 @@ public class MagazineController : MonoBehaviour, IMagazineController, IOnObjectN
     private void OnEnable()
     {
         _weapon.AttachMagazineController(this);
-        _currentMagazine = _weapon.currentMagazine;
     }
 
     private void OnDisable()
     {
         _weapon.ClearMagazineController();
-        _weapon.currentMagazine = _currentMagazine;
     }
 
     public void OnAwakeCalled(Weapon weapon)
@@ -56,7 +53,7 @@ public class MagazineController : MonoBehaviour, IMagazineController, IOnObjectN
             NoAmmunationAtInventory?.Invoke();
             return;
         }
-        if (_currentMagazine == magazineSize)
+        if (_weapon.currentMagazine == magazineSize)
         {
             MagazineFull?.Invoke();
             return;
@@ -80,15 +77,15 @@ public class MagazineController : MonoBehaviour, IMagazineController, IOnObjectN
     {
         yield return new WaitForSeconds(reloadTime);
 
-        var neededAmmo = magazineSize - _currentMagazine;
+        var neededAmmo = magazineSize - _weapon.currentMagazine;
         if (neededAmmo >= _ammo.Value)
         {
-            _currentMagazine += _ammo.Value;
+            _weapon.currentMagazine += _ammo.Value;
             _ammo.Value = 0;
         }
         else if (neededAmmo < _ammo.Value)
         {
-            _currentMagazine += neededAmmo;
+            _weapon.currentMagazine += neededAmmo;
             _ammo.Value -= neededAmmo;
         }
 
@@ -98,16 +95,11 @@ public class MagazineController : MonoBehaviour, IMagazineController, IOnObjectN
 
     public void DecreaseAmmo()
     {
-        --_currentMagazine;
-    }
-
-    public void SetCurrentMagazine(int amount)
-    {
-        _currentMagazine = Mathf.Clamp(amount, 0, magazineSize);
+        --_weapon.currentMagazine;
     }
 
     public bool ShootingAllowed()
     {
-        return _currentMagazine > 0 && _isReloading == false;
+        return _weapon.currentMagazine > 0 && _isReloading == false;
     }
 }

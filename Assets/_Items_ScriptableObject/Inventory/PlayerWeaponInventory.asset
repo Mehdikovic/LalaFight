@@ -12,4 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2908e5d1d9dad35478c4b9fcc1965022, type: 3}
   m_Name: PlayerWeaponInventory
   m_EditorClassIdentifier: 
-  _weapons: []
+  _pistolStartingGun:
+    inventoryItem: {fileID: 11400000, guid: 31ed82eaa400bc043b3b2505c538995a, type: 2}
+    rounds: 4
+  _otherStartingGun1:
+    inventoryItem: {fileID: 11400000, guid: ebbd9b7bf4b20154e8bd771a4cd724de, type: 2}
+    rounds: 10
+  _otherStartingGun2:
+    inventoryItem: {fileID: 11400000, guid: cbb0953c32edb8a4c8114e7fe1ec43b5, type: 2}
+    rounds: 2

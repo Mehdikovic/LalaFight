@@ -16,10 +16,6 @@
 
     public bool isReloading => false;
 
-    public void SetCurrentMagazine(int amount)
-    {
-        
-    }
 
     public bool ShootingAllowed()
     {

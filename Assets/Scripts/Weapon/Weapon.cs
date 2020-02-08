@@ -20,7 +20,7 @@ public abstract class Weapon : MonoBehaviour
     private IMagazineController _magazine = null;
     private IMagazineController _nullMagazine = new NullMagazine();
     private Transform _playerOwner = null;
-
+    private int _currentMagazine = 0;
     //TODO: add Ammunation Inventory
 
     //TODO: add equipment manager to modifying the stats' values
@@ -31,7 +31,11 @@ public abstract class Weapon : MonoBehaviour
     public Transform playerOwner => _playerOwner;
     public IMagazineController magazine => _magazine ?? _nullMagazine;
 
-    public int currentMagazine { get; set; }
+    public int currentMagazine
+    {
+        get => _currentMagazine;
+        set => _currentMagazine = Mathf.Clamp(value, 0, magazieSize);
+    }
     public float accuracy => _stats.accuracy.value;
     public int damage => _stats.damage.value;
     public float bulletSpeed => _stats.bulletSpeed.value;
@@ -54,7 +58,7 @@ public abstract class Weapon : MonoBehaviour
     protected virtual void Awake()
     {
         var subscribers = GetComponents<IOnObjectNotifier<Weapon>>();
-        foreach(var sub in subscribers)
+        foreach (var sub in subscribers)
         {
             sub.OnAwakeCalled(this);
         }

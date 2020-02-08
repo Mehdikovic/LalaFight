@@ -4,7 +4,7 @@ public class WeaponCollectable : Interactable
 {
     [SerializeField] private InventoryItemWeapon _weapon = null;
     [SerializeField] private int _rounds = 10;
-    
+
     //GETTERS AND SETTERS
     public int rounds { get => _rounds; set => _rounds = value; }
 
@@ -18,7 +18,21 @@ public class WeaponCollectable : Interactable
             return;
         }
 
-        WeaponInventory weaponInv = weaponManager.Inventory;
-        //weaponInv.AddItem(new WeaponInfoMount { inventoryItem = _weapon, rounds = _rounds });
+        var mountInfo = new WeaponMountInfo() { inventoryWeapon = _weapon, rounds = _rounds };
+        var mountinfo = weaponManager.AddInventoryItem(mountInfo);
+
+        if (mountinfo.inventoryWeapon != _weapon)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        if (mountinfo)
+        {
+            //TODO: instantiate collectable and destroy this object
+            print(mountinfo.inventoryWeapon.itemName);
+        }
+
+        
     }
 }

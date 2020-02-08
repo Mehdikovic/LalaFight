@@ -392,13 +392,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa84c4b843313ff46818d3b73a8e1225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _allowedWeaponNumber: 3
+  _allowedWeaponNumber: 2
   _weaponHolder: {fileID: 2252849772987505164}
-  _inventory: {fileID: 11400000, guid: 2478fdfdb9962a744922ba54f7c9053c, type: 2}
-  _pistolStartGun: {fileID: 4696563887833144946, guid: 58d39a154c496e14cb74f07963783715,
-    type: 3}
-  _otherStartGun:
-  - {fileID: 2490325649292596324, guid: 233550796af7a0043b3084914d643013, type: 3}
+  _pistolStartGun:
+    inventoryWeapon: {fileID: 0}
+    rounds: 0
+  _otherStartGun: []
 --- !u!114 &4746143785221116086
 MonoBehaviour:
   m_ObjectHideFlags: 0
