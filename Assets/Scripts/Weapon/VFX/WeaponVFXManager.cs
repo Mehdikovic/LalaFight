@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 
-public class WeaponVFXManager : MonoBehaviour
-{
-    [Header("Weapon")]
-    [SerializeField] private Weapon _weapon = null;
-    
+public class WeaponVFXManager : MonoBehaviour, IOnObjectNotifier<Weapon>
+{   
     [Header("Shell")]
     [SerializeField] private Transform _shellSpawnerPoint = null;
     [SerializeField] private BulletShellVFX _bulletShellPrefab = null;
@@ -13,13 +10,15 @@ public class WeaponVFXManager : MonoBehaviour
     [SerializeField] private Transform _clipSpawnerPoint = null;
     [SerializeField] private GameObject _clipPrefab = null;
 
- 
+    private Weapon _weapon = null;
     private IMagazineController _magazine = null;
 
-    private void Awake()
+    public void OnAwakeCalled(Weapon weapon)
     {
+        _weapon = weapon;
+
         _magazine = GetComponent<IMagazineController>() ?? new NullMagazine();
-        
+
         _weapon.OnFireEnd += OnWeaponFire;
         _magazine.Reloading += OnMagazineReloading;
     }

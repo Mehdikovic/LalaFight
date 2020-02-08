@@ -3,10 +3,9 @@ using System.Collections;
 using UnityEngine;
 
 
-public class MagazineController : MonoBehaviour, IMagazineController
+public class MagazineController : MonoBehaviour, IMagazineController, IOnObjectNotifier<Weapon>
 {
-    [Header("Weapon")]
-    [SerializeField] private Weapon _weapon = null;
+    private Weapon _weapon = null;
 
     private int _currentMagazine = 0;
     private bool _isReloading = false;
@@ -29,6 +28,24 @@ public class MagazineController : MonoBehaviour, IMagazineController
     public int currentMagazine => _currentMagazine;
 
     public bool isReloading => _isReloading;
+
+    //Unity CALLBACKS
+    private void OnEnable()
+    {
+        _weapon.AttachMagazineController(this);
+        _currentMagazine = _weapon.currentMagazine;
+    }
+
+    private void OnDisable()
+    {
+        _weapon.ClearMagazineController();
+        _weapon.currentMagazine = _currentMagazine;
+    }
+
+    public void OnAwakeCalled(Weapon weapon)
+    {
+        _weapon = weapon;
+    }
 
     public void Reload()
     {

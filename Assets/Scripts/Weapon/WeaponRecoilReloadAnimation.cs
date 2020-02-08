@@ -1,17 +1,15 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class WeaponRecoilReloadAnimation : MonoBehaviour
+public class WeaponRecoilReloadAnimation : MonoBehaviour, IOnObjectNotifier<Weapon>
 {
-    [Header("Weapon")]
-    [SerializeField] private Weapon _weapon = null;
-    
     [Header("Kick Amount")]
     [Range(0.1f, 0.6f)]
     [SerializeField] float _kickback = 0.1f;
     [Range(0f, 10f)]
     [SerializeField] float _kickup = 10f;
 
+    private Weapon _weapon = null;
     private IMagazineController _magazine;
 
     private Vector3 _recoilPositionSmoothVelocity;
@@ -20,11 +18,12 @@ public class WeaponRecoilReloadAnimation : MonoBehaviour
     private bool _isReloaded = false;
     private float _reloadTime = 0;
 
-    private void Awake()
+    public void OnAwakeCalled(Weapon weapon)
     {
+        _weapon = weapon;
         _magazine = GetComponent<IMagazineController>() ?? new NullMagazine();
-        _reloadTime = _magazine.reloadTime;
-        
+        _reloadTime = _weapon.reloadTime;
+
         _weapon.OnFireEnd += OnWeaponFired;
         _magazine.Reloading += OnMagazineReloading;
         _magazine.ReloadingCanceled += OnMagazineReloadingCanceled;
