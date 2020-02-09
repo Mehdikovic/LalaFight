@@ -35,7 +35,7 @@ public class WeaponCollectable : Interactable
     {
         WeaponCollectable collectable = Instantiate(mountInfo.inventoryWeapon.collectable, position, Quaternion.identity);
         collectable.rounds = mountInfo.rounds;
-        var rigidbody = GetComponent<Rigidbody>();
+        var rigidbody = collectable.GetComponent<Rigidbody>();
         if (rigidbody)
         {
             rigidbody.AddForce(dir * 2000);
