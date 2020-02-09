@@ -42,7 +42,7 @@ namespace LalaFight
             if (rigidbody)
             {
                 rigidbody.AddForce(dir * 2000);
-                rigidbody.GetComponent<Rigidbody>().AddTorque(Random.insideUnitSphere * 300);
+                rigidbody.GetComponent<Rigidbody>().AddTorque(Vector3.up * 300);
             }
         }
     }

@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shellSpawnerPoint: {fileID: 8127974939429277432}
-  _bulletShellPrefab: {fileID: -7429665437862226360, guid: 0cb556c566ae8954685ad18bcdf67d8d,
+  _bulletShellPrefab: {fileID: 582180439838117860, guid: 0cb556c566ae8954685ad18bcdf67d8d,
     type: 3}
   _clipSpawnerPoint: {fileID: 5185985126009107903}
   _clipPrefab: {fileID: 4458903672703301244, guid: da1a4f83542c3784fa05347978e935a6,

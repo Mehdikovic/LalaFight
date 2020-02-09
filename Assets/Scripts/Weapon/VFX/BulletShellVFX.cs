@@ -27,7 +27,7 @@ namespace LalaFight
         {
             float speed = 1 / _lifetime;
             float percent = 0;
-            Material material = GetComponent<Renderer>().material;
+            Material material = GetComponentInChildren<Renderer>().material;
             Color originalColor = material.color;
 
             while (percent < 1f)

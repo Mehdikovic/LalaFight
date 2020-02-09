@@ -97,11 +97,16 @@ namespace LalaFight
             if (weaponsCount > 1 && _isWeaponHided == false)
             {
                 var oldCurrentWeaponIndex = _currentWeaponIndex;
-                _currentWeaponIndex += changeIndex;
+                
 
-                //_currentWeaponIndex = Mathf.Clamp(_currentWeaponIndex, 0, _weapons.Count - 1);
-                _currentWeaponIndex = _currentWeaponIndex == weaponsCount ? 0 : _currentWeaponIndex;
-                _currentWeaponIndex = _currentWeaponIndex == -1 ? weaponsCount - 1 : _currentWeaponIndex;
+                for (int i = 0; i < _weapons.Length; i++)
+                {
+                    _currentWeaponIndex += changeIndex;
+                    _currentWeaponIndex = _currentWeaponIndex == _weapons.Length ? 0 : _currentWeaponIndex;
+                    _currentWeaponIndex = _currentWeaponIndex == -1 ? _weapons.Length - 1 : _currentWeaponIndex;
+                    if (currentWeapon)
+                        break;
+                }
 
                 if (oldCurrentWeaponIndex == _currentWeaponIndex)
                     return;
