@@ -12,7 +12,6 @@ namespace LalaFight
         private bool _isReloading = false;
 
         private Coroutine _reloadCoroutine;
-        private int _ammo = 500;
 
         //EVENTS
         public event Action NoAmmunationAtInventory;
@@ -50,7 +49,7 @@ namespace LalaFight
         {
             if (_isReloading)
                 return;
-            if (_ammo <= 0)
+            if (_weapon.ammo <= 0)
             {
                 NoAmmunationAtInventory?.Invoke();
                 return;
@@ -80,15 +79,15 @@ namespace LalaFight
             yield return new WaitForSeconds(reloadTime);
 
             var neededAmmo = magazineSize - _weapon.currentMagazine;
-            if (neededAmmo >= _ammo)
+            if (neededAmmo >= _weapon.ammo)
             {
-                _weapon.currentMagazine += _ammo;
-                _ammo = 0;
+                _weapon.currentMagazine += _weapon.ammo;
+                _weapon.ammo = 0;
             }
-            else if (neededAmmo < _ammo)
+            else if (neededAmmo < _weapon.ammo)
             {
                 _weapon.currentMagazine += neededAmmo;
-                _ammo -= neededAmmo;
+                _weapon.ammo -= neededAmmo;
             }
 
             _isReloading = false;

@@ -24,7 +24,7 @@ namespace LalaFight
         private IMagazineController _nullMagazine = new NullMagazine();
         private Transform _playerOwner = null;
         private int _currentMagazine = 0;
-        //TODO: add Ammunation Inventory
+        private AmmoManager _ammoManager;
 
         //TODO: add equipment manager to modifying the stats' values
         //GETTERS AND SETTERS
@@ -33,6 +33,20 @@ namespace LalaFight
         public BulletType bulletType => _bulletType;
         public Transform playerOwner => _playerOwner;
         public IMagazineController magazine => _magazine ?? _nullMagazine;
+
+        public int ammo
+        {
+            get 
+            {
+                return _ammoManager == null ? 0 : _ammoManager.GetAmmo(_bulletType);
+            }
+            set
+            {
+                if (_ammoManager != null)
+                    _ammoManager.SetAmmo(_bulletType, value);
+            }
+        }
+
 
         public int currentMagazine
         {
@@ -174,8 +188,10 @@ namespace LalaFight
 
         public void SetOwner(Transform owner)
         {
+            if (_playerOwner != owner)
+                OnOwnerChanged?.Invoke(owner != null);
             _playerOwner = owner;
-            OnOwnerChanged?.Invoke(owner != null);
+            _ammoManager = _playerOwner?.GetComponent<AmmoManager>();
         }
 
         protected void CreateBullet(float rotation = 0)

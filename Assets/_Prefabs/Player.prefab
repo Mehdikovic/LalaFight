@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 2252849774192991534}
   - component: {fileID: 3754911042037574940}
   - component: {fileID: 2252849774192991536}
+  - component: {fileID: 9185920385046737850}
   - component: {fileID: 4746143785221116086}
   - component: {fileID: 551463621}
   - component: {fileID: 2921984364377958038}
@@ -344,12 +345,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa84c4b843313ff46818d3b73a8e1225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _allowedWeaponNumber: 2
+  _allowedWeaponNumber: 3
   _weaponHolder: {fileID: 2252849772987505164}
   _pistolStartGun:
     inventoryWeapon: {fileID: 0}
     rounds: 0
   _otherStartGun: []
+--- !u!114 &9185920385046737850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2252849774192991528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46b68d071587ef3459055503e3a28806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _smallAmmo:
+    inventoryItem: {fileID: 11400000, guid: 254b4955be6881148bd90d0aad7ce3a3, type: 2}
+    rounds: 2
+  _mediumAmmo:
+    inventoryItem: {fileID: 11400000, guid: cb78626e24c71b0418c2682d55545897, type: 2}
+    rounds: 10
+  _heavyAmmo:
+    inventoryItem: {fileID: 11400000, guid: 81c34fb7ebfbb5d40909f735d481afa2, type: 2}
+    rounds: 0
 --- !u!114 &4746143785221116086
 MonoBehaviour:
   m_ObjectHideFlags: 0
