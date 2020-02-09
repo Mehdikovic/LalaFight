@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(MapGenerator))]
-public class MapGeneratorEditor : Editor
+namespace LalaFight
 {
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(MapGenerator))]
+    public class MapGeneratorEditor : Editor
     {
-        var mapGenerator = target as MapGenerator;
-        if(DrawDefaultInspector())
-            mapGenerator.AssembleMapGeneration();
-        
-        if (GUILayout.Button("Generate Map"))
-            mapGenerator.AssembleMapGeneration();
+        public override void OnInspectorGUI()
+        {
+            var mapGenerator = target as MapGenerator;
+            if (DrawDefaultInspector())
+                mapGenerator.AssembleMapGeneration();
+
+            if (GUILayout.Button("Generate Map"))
+                mapGenerator.AssembleMapGeneration();
+        }
     }
 }

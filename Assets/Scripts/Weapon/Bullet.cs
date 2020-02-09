@@ -2,63 +2,66 @@
 using UnityEngine;
 
 
-public class Bullet : MonoBehaviour
+namespace LalaFight
 {
-    [SerializeField] private LayerMask _bulletIntractionLayerMask = new LayerMask();
-
-    private float _bulletSpeed;
-    private int _bulletDamage;
-
-    public event Action<Collider, Vector3, Vector3> Collided;
-
-    private void Start()
+    public class Bullet : MonoBehaviour
     {
-        CheckCollision();
-    }
+        [SerializeField] private LayerMask _bulletIntractionLayerMask = new LayerMask();
 
-    private void Update()
-    {
-        float moveDistance = _bulletSpeed * Time.deltaTime;
-        CheckCollision(moveDistance);
-        transform.Translate(moveDistance * Vector3.forward);
-    }
+        private float _bulletSpeed;
+        private int _bulletDamage;
 
-    protected void CheckCollision()
-    {
-        var colliders = Physics.OverlapSphere(transform.position, 0.15f, _bulletIntractionLayerMask, QueryTriggerInteraction.Collide);
-        if (colliders.Length > 0)
-            HandleColliderObject(colliders[0], transform.position);
-    }
+        public event Action<Collider, Vector3, Vector3> Collided;
 
-    protected void CheckCollision(float moveDistance)
-    {
-        Ray ray = new Ray(transform.position, transform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, moveDistance, _bulletIntractionLayerMask, QueryTriggerInteraction.Collide))
-            HandleColliderObject(hit.collider, hit.point);
-    }
-
-    private void HandleColliderObject(Collider collider, Vector3 hitPoint)
-    {
-        var enemy = collider.GetComponent<IDamageable>();
-        if (enemy != null)
+        private void Start()
         {
-            enemy.TakeDamage(_bulletDamage, transform.position, transform.forward);
+            CheckCollision();
         }
-        Collided?.Invoke(collider, hitPoint, transform.forward);
-        Destroy(gameObject);
-    }
 
-    public void Initialize(Weapon weapon, float rotationAmount)
-    {
-        _bulletSpeed = weapon.bulletSpeed;
-        _bulletDamage = weapon.damage;
+        private void Update()
+        {
+            float moveDistance = _bulletSpeed * Time.deltaTime;
+            CheckCollision(moveDistance);
+            transform.Translate(moveDistance * Vector3.forward);
+        }
 
-        float accuracyFlaw = 0f;
-        if (UnityEngine.Random.value > weapon.accuracy)
-             accuracyFlaw = UnityEngine.Random.Range(-8f, 8f);
+        protected void CheckCollision()
+        {
+            var colliders = Physics.OverlapSphere(transform.position, 0.15f, _bulletIntractionLayerMask, QueryTriggerInteraction.Collide);
+            if (colliders.Length > 0)
+                HandleColliderObject(colliders[0], transform.position);
+        }
 
-        transform.Rotate(Vector3.up, rotationAmount + accuracyFlaw);
+        protected void CheckCollision(float moveDistance)
+        {
+            Ray ray = new Ray(transform.position, transform.forward);
+            if (Physics.Raycast(ray, out RaycastHit hit, moveDistance, _bulletIntractionLayerMask, QueryTriggerInteraction.Collide))
+                HandleColliderObject(hit.collider, hit.point);
+        }
 
-        Destroy(gameObject, 5f);
+        private void HandleColliderObject(Collider collider, Vector3 hitPoint)
+        {
+            var enemy = collider.GetComponent<IDamageable>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(_bulletDamage, transform.position, transform.forward);
+            }
+            Collided?.Invoke(collider, hitPoint, transform.forward);
+            Destroy(gameObject);
+        }
+
+        public void Initialize(Weapon weapon, float rotationAmount)
+        {
+            _bulletSpeed = weapon.bulletSpeed;
+            _bulletDamage = weapon.damage;
+
+            float accuracyFlaw = 0f;
+            if (UnityEngine.Random.value > weapon.accuracy)
+                accuracyFlaw = UnityEngine.Random.Range(-8f, 8f);
+
+            transform.Rotate(Vector3.up, rotationAmount + accuracyFlaw);
+
+            Destroy(gameObject, 5f);
+        }
     }
 }

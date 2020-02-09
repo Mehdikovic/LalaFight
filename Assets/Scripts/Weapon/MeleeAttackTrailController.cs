@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class MeleeAttackTrailController : MonoBehaviour
+
+namespace LalaFight
 {
-    [SerializeField] private MeleeAttack _melee = null;
-    [SerializeField] private TrailRenderer _trail = null;
-
-    private void Awake()
+    public class MeleeAttackTrailController : MonoBehaviour
     {
-        _melee.Attacked += OnMeleeAttack;
-    }
+        [SerializeField] private MeleeAttack _melee = null;
+        [SerializeField] private TrailRenderer _trail = null;
 
-    private void OnMeleeAttack()
-    {
-        if (_trail.emitting)
-            _trail.emitting = false;
-        _trail.emitting = true;
+        private void Awake()
+        {
+            _melee.Attacked += OnMeleeAttack;
+        }
+
+        private void OnMeleeAttack()
+        {
+            if (_trail.emitting)
+                _trail.emitting = false;
+            _trail.emitting = true;
+        }
     }
 }

@@ -1,14 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Destroyer : MonoBehaviour
+
+namespace LalaFight
 {
-    [SerializeField] private float _lifetime = 10f;
-    
-    void Awake()
+    public class Destroyer : MonoBehaviour
     {
-        Destroy(gameObject, _lifetime);
-    }
+        [SerializeField] private float _lifetime = 10f;
 
+        void Awake()
+        {
+            Destroy(gameObject, _lifetime);
+        }
+    }
 }

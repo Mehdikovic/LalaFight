@@ -1,26 +1,30 @@
 ﻿using UnityEngine;
 
-public class PlayerCursor : MonoBehaviour
+
+namespace LalaFight
 {
-    [SerializeField] private GameObject _playerCursor = null;
-    void Awake()
+    public class PlayerCursor : MonoBehaviour
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = false;
+        [SerializeField] private GameObject _playerCursor = null;
+        void Awake()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = false;
 
-        GetComponent<WeaponManager>().WeaponHideStateChanged += OnWeaponHideStateChanged;
-        GetComponent<PlayerInput>().OnHitPointSet += OnHitPointSet;
-        _playerCursor.SetActive(false);
-    }
+            GetComponent<WeaponManager>().WeaponHideStateChanged += OnWeaponHideStateChanged;
+            GetComponent<PlayerInput>().OnHitPointSet += OnHitPointSet;
+            _playerCursor.SetActive(false);
+        }
 
-    private void OnHitPointSet(Vector3 hitPoint, Vector3 cameraForward) 
-    {
-        _playerCursor.transform.position = hitPoint;
-        _playerCursor.transform.forward = -cameraForward;
-    }
+        private void OnHitPointSet(Vector3 hitPoint, Vector3 cameraForward)
+        {
+            _playerCursor.transform.position = hitPoint;
+            _playerCursor.transform.forward = -cameraForward;
+        }
 
-    private void OnWeaponHideStateChanged(bool isHided)
-    {
-        _playerCursor.SetActive(isHided);
+        private void OnWeaponHideStateChanged(bool isHided)
+        {
+            _playerCursor.SetActive(isHided);
+        }
     }
 }

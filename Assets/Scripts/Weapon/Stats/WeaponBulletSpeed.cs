@@ -1,7 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Weapon/WeaponStat/BulletSpeed")]
-public class WeaponBulletSpeed : WeaponStatProperty<int>
+
+namespace LalaFight
 {
+    [CreateAssetMenu(menuName = "Weapon/WeaponStat/BulletSpeed")]
+    public class WeaponBulletSpeed : WeaponStatProperty<int>
+    {
+    }
 }

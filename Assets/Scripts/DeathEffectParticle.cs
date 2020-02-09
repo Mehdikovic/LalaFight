@@ -1,22 +1,26 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(HealthController))]
-public class DeathEffectParticle : MonoBehaviour
+
+namespace LalaFight
 {
-    [SerializeField] private ParticleSystem _deathEffect = null;
-
-    private HealthController _healthController;
-
-    private void Awake()
+    [RequireComponent(typeof(HealthController))]
+    public class DeathEffectParticle : MonoBehaviour
     {
-        _healthController = GetComponent<HealthController>();
-        _healthController.OnFinalDamage += ShowParticleEffect;
-    }
+        [SerializeField] private ParticleSystem _deathEffect = null;
+
+        private HealthController _healthController;
+
+        private void Awake()
+        {
+            _healthController = GetComponent<HealthController>();
+            _healthController.OnFinalDamage += ShowParticleEffect;
+        }
 
 
-    private void ShowParticleEffect(Vector3 position, Vector3 direction)
-    {
-        var particle = Instantiate(_deathEffect, position, Quaternion.FromToRotation(Vector3.forward, direction));
-        particle.GetComponent<Renderer>().material.color = GetComponent<Renderer>().material.color;
+        private void ShowParticleEffect(Vector3 position, Vector3 direction)
+        {
+            var particle = Instantiate(_deathEffect, position, Quaternion.FromToRotation(Vector3.forward, direction));
+            particle.GetComponent<Renderer>().material.color = GetComponent<Renderer>().material.color;
+        }
     }
 }

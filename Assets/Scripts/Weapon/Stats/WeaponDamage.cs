@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Weapon/WeaponStat/Damage")]
-public class WeaponDamage : WeaponStatProperty<int>
+
+namespace LalaFight
 {
+    [CreateAssetMenu(menuName = "Weapon/WeaponStat/Damage")]
+    public class WeaponDamage : WeaponStatProperty<int>
+    {
+    }
 }

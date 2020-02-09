@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 
-public class Interactable : MonoBehaviour
+
+namespace LalaFight
 {
-    [SerializeField] protected string _message = null;
-    public virtual void Interact(Transform player) { }
+    public class Interactable : MonoBehaviour
+    {
+        [SerializeField] protected string _message = null;
+        public virtual void Interact(Transform player) { }
+    }
 }

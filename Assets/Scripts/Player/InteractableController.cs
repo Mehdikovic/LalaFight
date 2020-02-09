@@ -1,32 +1,36 @@
 ﻿using UnityEngine;
 
-public class InteractableController : MonoBehaviour
+
+namespace LalaFight
 {
-    [Header("Interact")]
-    [SerializeField] private LayerMask _interactableMask = new LayerMask();
-    [SerializeField] private float _timeBetweenInteract = 0.2f;
-    
-    private float _interactTimer = 0;
-    private Vector3 _position = Vector3.zero;
-    private float _radius = 2f;
-    
-    public void Tick()
+    public class InteractableController : MonoBehaviour
     {
-        if (Input.GetButtonDown("Intract"))
-            IntreactWith();
-    }
+        [Header("Interact")]
+        [SerializeField] private LayerMask _interactableMask = new LayerMask();
+        [SerializeField] private float _timeBetweenInteract = 0.2f;
 
-    private void IntreactWith()
-    {
-        if (_interactTimer < Time.time)
+        private float _interactTimer = 0;
+        private Vector3 _position = Vector3.zero;
+        private float _radius = 2f;
+
+        public void Tick()
         {
-            _interactTimer = Time.time + _timeBetweenInteract;
+            if (Input.GetButtonDown("Intract"))
+                IntreactWith();
+        }
 
-            _position = transform.position + Vector3.forward;
+        private void IntreactWith()
+        {
+            if (_interactTimer < Time.time)
+            {
+                _interactTimer = Time.time + _timeBetweenInteract;
 
-            var colliders = Physics.OverlapSphere(_position, _radius, _interactableMask, QueryTriggerInteraction.Collide);
-            if (colliders.Length > 0)
-                colliders[0].GetComponent<Interactable>().Interact(transform);
+                _position = transform.position + Vector3.forward;
+
+                var colliders = Physics.OverlapSphere(_position, _radius, _interactableMask, QueryTriggerInteraction.Collide);
+                if (colliders.Length > 0)
+                    colliders[0].GetComponent<Interactable>().Interact(transform);
+            }
         }
     }
 }

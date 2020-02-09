@@ -1,20 +1,24 @@
 ﻿using UnityEngine;
 
-public class BulletParticleEffect : MonoBehaviour
+
+namespace LalaFight
 {
-    [SerializeField] private ParticleSystem _bulletCollisionEffect = null;
-
-    private Bullet _bullet;
-
-    private void Awake()
+    public class BulletParticleEffect : MonoBehaviour
     {
-        _bullet = GetComponent<Bullet>();
-        _bullet.Collided += OnBulletCollided;
-    }
+        [SerializeField] private ParticleSystem _bulletCollisionEffect = null;
 
-    private void OnBulletCollided(Collider collider, Vector3 position, Vector3 bulletForward)
-    {
-        var particle = Instantiate(_bulletCollisionEffect, position, Quaternion.FromToRotation(Vector3.forward, bulletForward));
-        particle.GetComponent<Renderer>().material.color = collider.GetComponent<Renderer>().material.color;
+        private Bullet _bullet;
+
+        private void Awake()
+        {
+            _bullet = GetComponent<Bullet>();
+            _bullet.Collided += OnBulletCollided;
+        }
+
+        private void OnBulletCollided(Collider collider, Vector3 position, Vector3 bulletForward)
+        {
+            var particle = Instantiate(_bulletCollisionEffect, position, Quaternion.FromToRotation(Vector3.forward, bulletForward));
+            particle.GetComponent<Renderer>().material.color = collider.GetComponent<Renderer>().material.color;
+        }
     }
 }

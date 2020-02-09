@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Weapon/WeaponStat/ScopeRange")]
-public class WeaponScopeRange : WeaponStatProperty<float>
-{ }
+
+namespace LalaFight
+{
+    [CreateAssetMenu(menuName = "Weapon/WeaponStat/ScopeRange")]
+    public class WeaponScopeRange : WeaponStatProperty<float>
+    { }
+}

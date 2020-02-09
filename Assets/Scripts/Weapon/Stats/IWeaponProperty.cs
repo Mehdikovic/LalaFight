@@ -1,5 +1,8 @@
-﻿public interface IWeaponProperty
+﻿namespace LalaFight
 {
-    bool Update();
-    int GetLevel();
+    public interface IWeaponProperty
+    {
+        bool Update();
+        int GetLevel();
+    }
 }

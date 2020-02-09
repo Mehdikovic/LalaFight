@@ -1,6 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
+
+
+
 namespace LalaFight
 {
     [RequireComponent(typeof(Rigidbody))]

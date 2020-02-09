@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 
-public interface IOnObjectNotifier<T> where T : MonoBehaviour
+
+namespace LalaFight
 {
-    void OnAwakeCalled(T broadcaster);
+    public interface IOnObjectNotifier<T> where T : MonoBehaviour
+    {
+        void OnAwakeCalled(T broadcaster);
+    }
 }

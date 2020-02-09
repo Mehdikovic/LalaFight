@@ -1,21 +1,25 @@
 ﻿using System.Text;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Weapon/StatContainer/MultipleShot")]
-public class MultipleProjectileWeaponStat : WeaponStats
+
+namespace LalaFight
 {
-    public WeaponBulletPerShot bulletPerShot;
-
-    protected override void OnEnable()
+    [CreateAssetMenu(menuName = "Weapon/StatContainer/MultipleShot")]
+    public class MultipleProjectileWeaponStat : WeaponStats
     {
-        base.OnEnable();
-        _properties.Add("bulletPerShot", bulletPerShot);
-    }
+        public WeaponBulletPerShot bulletPerShot;
 
-    public override string ToString()
-    {
-        var sb = new StringBuilder().Append(base.ToString());
-        sb.Append("bulletPerShot: ").Append(bulletPerShot.value);
-        return sb.ToString();
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            _properties.Add("bulletPerShot", bulletPerShot);
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder().Append(base.ToString());
+            sb.Append("bulletPerShot: ").Append(bulletPerShot.value);
+            return sb.ToString();
+        }
     }
 }

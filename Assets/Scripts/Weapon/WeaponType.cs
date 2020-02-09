@@ -1,8 +1,11 @@
-﻿public enum WeaponType
+﻿namespace LalaFight
 {
-    Pistol,
-    SMG,
-    Shotgun,
-    Rifle
-}
+    public enum WeaponType
+    {
+        Pistol,
+        SMG,
+        Shotgun,
+        Rifle
+    }
 
+}

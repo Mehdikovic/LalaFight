@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 
-public class ParticleDestroyer : MonoBehaviour
-{
-    private ParticleSystem _particleSystem;
 
-    private void Awake()
+namespace LalaFight
+{
+    public class ParticleDestroyer : MonoBehaviour
     {
-        _particleSystem = GetComponent<ParticleSystem>();
-        Destroy(gameObject, _particleSystem.main.startLifetimeMultiplier);
+        private ParticleSystem _particleSystem;
+
+        private void Awake()
+        {
+            _particleSystem = GetComponent<ParticleSystem>();
+            Destroy(gameObject, _particleSystem.main.startLifetimeMultiplier);
+        }
     }
 }

@@ -1,28 +1,32 @@
 ﻿using System;
 using UnityEngine;
 
-[Serializable]
-public struct Map
+
+namespace LalaFight
 {
-    public int seed;
-    
-    [Header("Size")]
-    [Range(2, 40)]
-    public int width;
-    [Range(2, 40)]
-    public int height;
-    
-    [Range(0f, 1f)]
-    [Header("")]
-    public float obstanclePercent;
+    [Serializable]
+    public struct Map
+    {
+        public int seed;
 
-    [Header("ObstacleHeight")]
-    public float minObstacleHeight;
-    public float maxObstacleHeight;
+        [Header("Size")]
+        [Range(2, 40)]
+        public int width;
+        [Range(2, 40)]
+        public int height;
 
-    [Header("ObstacleColor")]
-    public Color forgroundColor;
-    public Color backgroundColor;
+        [Range(0f, 1f)]
+        [Header("")]
+        public float obstanclePercent;
 
-    public Coord mapCenter => new Coord(width / 2, height / 2); // Start point player
+        [Header("ObstacleHeight")]
+        public float minObstacleHeight;
+        public float maxObstacleHeight;
+
+        [Header("ObstacleColor")]
+        public Color forgroundColor;
+        public Color backgroundColor;
+
+        public Coord mapCenter => new Coord(width / 2, height / 2); // Start point player
+    }
 }
