@@ -19,20 +19,27 @@ public class WeaponCollectable : Interactable
         }
 
         var mountInfo = new WeaponMountInfo() { inventoryWeapon = _weapon, rounds = _rounds };
-        var mountinfo = weaponManager.AddInventoryItem(mountInfo);
 
-        if (mountinfo.inventoryWeapon != _weapon)
+        var returndMountInfo = weaponManager.AddInventoryItem(mountInfo);
+
+        if (returndMountInfo.inventoryWeapon != _weapon)
         {
+            if (returndMountInfo)
+                SpawnCollectable(returndMountInfo, player.position.WithY(1.5f), player.forward);
             Destroy(gameObject);
             return;
         }
+    }
 
-        if (mountinfo)
+    private void SpawnCollectable(WeaponMountInfo mountInfo, Vector3 position, Vector3 dir)
+    {
+        WeaponCollectable collectable = Instantiate(mountInfo.inventoryWeapon.collectable, position, Quaternion.identity);
+        collectable.rounds = mountInfo.rounds;
+        var rigidbody = GetComponent<Rigidbody>();
+        if (rigidbody)
         {
-            //TODO: instantiate collectable and destroy this object
-            print(mountinfo.inventoryWeapon.itemName);
+            rigidbody.AddForce(dir * 2000);
+            rigidbody.GetComponent<Rigidbody>().AddTorque(Random.insideUnitSphere * 300);
         }
-
-        
     }
 }
