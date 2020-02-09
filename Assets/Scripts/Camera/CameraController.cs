@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using LalaFight;
 
 public class CameraController : MonoBehaviour
 {

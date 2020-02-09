@@ -1,40 +1,42 @@
 ﻿using System;
 using UnityEngine;
 
-
-[RequireComponent(typeof(Rigidbody))]
-public class PlayerController : MonoBehaviour
+namespace LalaFight
 {
-    [SerializeField] private float _playerSpeed = 30f;
-    private Vector3 _velocity;
-    private Rigidbody _rigidBody;
-
-    public Action OnPlayerFall;
-
-    private void Awake()
+    [RequireComponent(typeof(Rigidbody))]
+    public class PlayerController : MonoBehaviour
     {
-        _rigidBody = GetComponent<Rigidbody>();
-    }
+        [SerializeField] private float _playerSpeed = 30f;
+        private Vector3 _velocity;
+        private Rigidbody _rigidBody;
 
-    private void Update()
-    {
-        if (transform.position.y <= -.5f)
-            OnPlayerFall?.Invoke();
-    }
+        public Action OnPlayerFall;
 
-    private void FixedUpdate()
-    {
-        _rigidBody.MovePosition(_rigidBody.position + _velocity * Time.fixedDeltaTime);
-    }
+        private void Awake()
+        {
+            _rigidBody = GetComponent<Rigidbody>();
+        }
 
-    public void Move(Vector3 velocity)
-    {
-        _velocity = velocity * _playerSpeed;
-    }
+        private void Update()
+        {
+            if (transform.position.y <= -.5f)
+                OnPlayerFall?.Invoke();
+        }
 
-    public void LookAt(Vector3 point)
-    {
-        //_rigidBody.MoveRotation(Quaternion.LookRotation(transform.position.DirectionTo(point.WithY(1))));
-        transform.LookAt(point.WithY(1));
+        private void FixedUpdate()
+        {
+            _rigidBody.MovePosition(_rigidBody.position + _velocity * Time.fixedDeltaTime);
+        }
+
+        public void Move(Vector3 velocity)
+        {
+            _velocity = velocity * _playerSpeed;
+        }
+
+        public void LookAt(Vector3 point)
+        {
+            //_rigidBody.MoveRotation(Quaternion.LookRotation(transform.position.DirectionTo(point.WithY(1))));
+            transform.LookAt(point.WithY(1));
+        }
     }
 }
