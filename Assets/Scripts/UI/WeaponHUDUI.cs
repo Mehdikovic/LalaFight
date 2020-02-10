@@ -20,7 +20,6 @@ namespace LalaFight
         private void Awake()
         {
             ClearUI();
-            _holder.SetActive(false);
         }
 
         public void Bind(Weapon weapon)

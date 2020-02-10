@@ -49,7 +49,8 @@ namespace LalaFight
             if (_weaponUI != null)
                 _weaponUI.Bind(_weaponManager.currentWeapon);
 
-            _weaponUI.Activate(!_weaponManager.isWeaponHided);
+            if (_weaponManager.currentWeapon)
+                _weaponUI.Activate(!_weaponManager.isWeaponHided);
         }
 
         private void WeaponManager_OnWeaponHideStateChanged(bool isHided)
