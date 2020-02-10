@@ -11,11 +11,9 @@ namespace LalaFight
         [SerializeField] private Image _screenImage = null;
         [SerializeField] private GameObject _UIObject = null;
         
-        public void Init(Transform player)
+        public void Init()
         {
             ChangeUIActive(false);
-            player.GetComponent<HealthController>().OnDeath += OnPlayerDeath;
-            player.GetComponent<PlayerController>().OnPlayerFall += OnPlayerDeath;
         }
 
         //EVENT- CALLED BY BUTTON IN GameOverCanvas
@@ -25,7 +23,7 @@ namespace LalaFight
             Time.timeScale = 1;
         }
 
-        private void OnPlayerDeath()
+        public void OnPlayerDeath()
         {
             _screenImage.gameObject.SetActive(true);
             StartCoroutine(ScreenFadeIn(Color.clear, Color.black, 1f));

@@ -18,9 +18,7 @@ namespace LalaFight
         //GETTERS AND SETTERS
         private FireModeType CurrentFireMode => _fireModes[_currentFireModeIndex];
 
-        //EVENTS
-        public event Action<FireModeType> FireModeChanged;
-
+        public override FireModeType GetCurrentFireMode() => CurrentFireMode;
 
         private void SwapFireMode()
         {
@@ -29,7 +27,8 @@ namespace LalaFight
 
             ++_currentFireModeIndex;
             _currentFireModeIndex %= _fireModes.Length;
-            FireModeChanged?.Invoke(CurrentFireMode);
+            
+            RaiseFireModeSwapped();
         }
 
         protected override void Awake()

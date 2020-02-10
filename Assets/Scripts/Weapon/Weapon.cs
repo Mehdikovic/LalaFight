@@ -73,6 +73,7 @@ namespace LalaFight
         public event Action OnFireEnd;
         public event Action OnWeaponLoaded;
         public event Action OnWeaponUnloaded;
+        public event Action<FireModeType> FireModeChanged;
 
         // UNITY CALLBACKS
         protected virtual void Awake()
@@ -81,16 +82,6 @@ namespace LalaFight
             foreach (var sub in subscribers)
             {
                 sub.OnAwakeCalled(this);
-            }
-        }
-
-        //TODO: delete this test
-        private void Update()
-        {
-            if (Input.GetMouseButtonDown(1))
-            {
-                var text = GameObject.FindGameObjectWithTag("TextMeshPro").GetComponent<UnityEngine.UI.Text>();
-                text.text = _stats.ToString();
             }
         }
 
@@ -187,5 +178,12 @@ namespace LalaFight
             var bullet = Instantiate(_bulletPrefab, _muzzle.position, _muzzle.rotation);
             bullet.Initialize(this, rotation);
         }
+
+        protected void RaiseFireModeSwapped()
+        {
+            FireModeChanged?.Invoke(GetCurrentFireMode());
+        }
+
+        public abstract FireModeType GetCurrentFireMode();
     }
 }

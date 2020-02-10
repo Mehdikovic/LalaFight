@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 namespace LalaFight
@@ -7,6 +8,8 @@ namespace LalaFight
     {
         [SerializeField] private int _maxShield = 10;
         int _currentShield = 0;
+
+        public event Action ArmorDamageTaken;
 
         public int maxShield
         {
@@ -42,6 +45,7 @@ namespace LalaFight
                 base.TakeDamage(Mathf.Abs(_currentShield), hitPosition, hitDirection);
 
             _currentShield = Mathf.Clamp(_currentShield, 0, _maxShield);
+            ArmorDamageTaken?.Invoke();
 
         }
     }

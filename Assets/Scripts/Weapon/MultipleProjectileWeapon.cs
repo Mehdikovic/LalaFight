@@ -5,8 +5,13 @@ namespace LalaFight
 {
     public class MultipleProjectileWeapon : Weapon
     {
+        [Header("FireMode")]
+        [Tooltip("Burst Fire mode is not recomended here")]
+        [SerializeField] private FireModeType _fireMode = FireModeType.Semi;
+        
         float[] shots;
         private MultipleProjectileWeaponStat _multipleShotStat;
+
         protected override void Awake()
         {
             base.Awake();
@@ -19,10 +24,20 @@ namespace LalaFight
                 shots[i] = Utility.Map(i, 0, shotNumbers - 1, -2, 2);
         }
 
+        public override FireModeType GetCurrentFireMode() => _fireMode;
+
         protected override void HandleShootInputs()
         {
-            if (Input.GetButtonDown("Fire1"))
-                Shoot();
+            if (_fireMode == FireModeType.Auto)
+            {
+                if (Input.GetButton("Fire1"))
+                    Shoot();
+            }
+            else
+            {
+                if (Input.GetButtonDown("Fire1"))
+                    Shoot();
+            }
         }
 
         private void Shoot()

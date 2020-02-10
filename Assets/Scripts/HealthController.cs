@@ -25,6 +25,7 @@ namespace LalaFight
         public int currentHealth => _currentHealth;
 
         //EVENTS
+        public event Action DamageTaken;
         public event Action OnDeath;
         public event Action<Vector3, Vector3> OnFinalDamage;
 
@@ -37,6 +38,7 @@ namespace LalaFight
         {
             _currentHealth -= bulletDamage;
             _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
+            DamageTaken?.Invoke();
             if (_currentHealth == 0 && _isDead == false)
             {
                 OnFinalDamage?.Invoke(hitPosition, hitDirection);

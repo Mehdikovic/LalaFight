@@ -137,7 +137,6 @@ MonoBehaviour:
   _timeBetweenPathFinding: 0.25
   _timeBetweenAttack: 3
   _attackSpeed: 2
-  _damage: 2
 --- !u!114 &4572510448245055357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,3 +164,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deathEffect: {fileID: 1186486738008730438, guid: 8d6f72013322da140afadb06e682fb87,
     type: 3}
+  _renderer: {fileID: 6705931827802453174}

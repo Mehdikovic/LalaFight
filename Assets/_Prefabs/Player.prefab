@@ -302,6 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deathEffect: {fileID: 1186486738008730438, guid: 8d6f72013322da140afadb06e682fb87,
     type: 3}
+  _renderer: {fileID: 3225817197161151780}
 --- !u!114 &3018183793417460678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,6 +351,8 @@ MonoBehaviour:
   _weaponReloadUIPrefab: {fileID: 2690803643442728522, guid: 472f2070fba7da841a6b7298e2e9c297,
     type: 3}
   _weaponHUDUIPrefab: {fileID: 8554448143197463094, guid: 6b0293dc2e4e44c4e94f03458b66bf0c,
+    type: 3}
+  _healthHUDPrefab: {fileID: 2868251042480868999, guid: 501f42fcb42b125469249d62cc04bc28,
     type: 3}
 --- !u!1 &3000036614856925190
 GameObject:
