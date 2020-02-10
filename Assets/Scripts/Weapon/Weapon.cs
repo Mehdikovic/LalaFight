@@ -8,6 +8,9 @@ namespace LalaFight
     public abstract class Weapon : MonoBehaviour
     {
         [SerializeField] private string _modelName = "ex: m4a1";
+        [Tooltip("If null default value will be set")]
+        [SerializeField] private Sprite _cursor = null;
+        [SerializeField] private Sprite _sprite = null;
         [SerializeField] private WeaponType _type = WeaponType.Pistol;
         [SerializeField] private BulletType _bulletType = BulletType.Medium;
 
@@ -20,7 +23,6 @@ namespace LalaFight
 
         private float _nextShootingTime = 0f;
         private bool _isAnimating = false;
-        private IMagazineController _magazine = null;
         private IMagazineController _nullMagazine = new NullMagazine();
         private Transform _playerOwner = null;
         private int _currentMagazine = 0;
@@ -29,10 +31,12 @@ namespace LalaFight
         //TODO: add equipment manager to modifying the stats' values
         //GETTERS AND SETTERS
         public string modelName => _modelName;
+        public Sprite cursor => _cursor;
+        public Sprite sprite => _sprite;
         public WeaponType type => _type;
         public BulletType bulletType => _bulletType;
         public Transform playerOwner => _playerOwner;
-        public IMagazineController magazine => _magazine ?? _nullMagazine;
+        public IMagazineController magazine => GetComponent<IMagazineController>() ?? _nullMagazine;
 
         public int ammo
         {
@@ -69,7 +73,6 @@ namespace LalaFight
         public event Action OnFireEnd;
         public event Action OnWeaponLoaded;
         public event Action OnWeaponUnloaded;
-        public event Action<Vector3, bool> OnCursorPositionReceived;
 
         // UNITY CALLBACKS
         protected virtual void Awake()
@@ -113,21 +116,6 @@ namespace LalaFight
 
         protected void NextShootingTime() => _nextShootingTime = Time.time + fireRate;
 
-        public void SetShootCursorPosition(Vector3 hitPoint, bool aimOnEnemy)
-        {
-            OnCursorPositionReceived?.Invoke(hitPoint, aimOnEnemy);
-        }
-
-        public void AttachMagazineController(MagazineController magazineController)
-        {
-            _magazine = magazineController;
-        }
-
-        public void ClearMagazineController()
-        {
-            _magazine = null;
-        }
-
         public virtual void FastLoad(bool _isWeaponHided)
         {
             gameObject.SetActive(true);
@@ -143,7 +131,7 @@ namespace LalaFight
             gameObject.SetActive(false);
         }
 
-        public virtual void OnWeaponLoad()
+        public virtual void WeaponLoad()
         {
             if (_isAnimating == true)
                 return;
@@ -156,7 +144,7 @@ namespace LalaFight
             StartCoroutine(LoadAnimation(60, 0, true));
         }
 
-        public virtual void OnWeaponUnload()
+        public virtual void WeaponUnload()
         {
             if (_isAnimating == true)
                 return;

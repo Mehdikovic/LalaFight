@@ -10,13 +10,12 @@ namespace LalaFight
     {
         [SerializeField] private Image _screenImage = null;
         [SerializeField] private GameObject _UIObject = null;
-        [SerializeField] private Transform _player = null;
-
-        private void Awake()
+        
+        public void Init(Transform player)
         {
             ChangeUIActive(false);
-            _player.GetComponent<HealthController>().OnDeath += OnPlayerDeath;
-            _player.GetComponent<PlayerController>().OnPlayerFall += OnPlayerDeath;
+            player.GetComponent<HealthController>().OnDeath += OnPlayerDeath;
+            player.GetComponent<PlayerController>().OnPlayerFall += OnPlayerDeath;
         }
 
         //EVENT- CALLED BY BUTTON IN GameOverCanvas

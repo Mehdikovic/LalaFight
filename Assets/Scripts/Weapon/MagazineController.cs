@@ -30,16 +30,8 @@ namespace LalaFight
         public bool isReloading => _isReloading;
 
         //Unity CALLBACKS
-        private void OnEnable()
-        {
-            _weapon.AttachMagazineController(this);
-        }
 
-        private void OnDisable()
-        {
-            _weapon.ClearMagazineController();
-        }
-
+        //Interface Callback
         public void OnAwakeCalled(Weapon weapon)
         {
             _weapon = weapon;

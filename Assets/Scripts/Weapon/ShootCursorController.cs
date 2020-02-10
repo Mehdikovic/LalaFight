@@ -18,7 +18,7 @@ namespace LalaFight
 
             weapon.OnWeaponLoaded += OnWeaponLoaded;
             weapon.OnWeaponUnloaded += OnWeaponUnloaded;
-            weapon.OnCursorPositionReceived += SetCursorPosition;
+            //weapon.OnCursorPositionReceived += SetCursorPosition;
             weapon.OnOwnerChanged += OnOwnerChanged;
 
             _cameraTransform = CameraDatabase.MainCamera.transform;

@@ -16,13 +16,43 @@ namespace LalaFight
 
         private void Awake()
         {
-            _magazine = GetComponent<IMagazineController>() ?? new NullMagazine();
+            SetUIVisibility(false);
+        }
 
+        public void Bind(Weapon weapon)
+        {
+            if (weapon == null)
+                return;
+            
+            _magazine = weapon.magazine;
+
+            SetUIVisibility(false);
+            RegisterEvents();
+        }
+
+        public void UnBind()
+        {
+            if (_magazine == null)
+                return;
+            
+            SetUIVisibility(false);
+            ClearEvents();
+            
+            _magazine = null;
+        }
+
+        private void RegisterEvents()
+        {
             _magazine.Reloading += OnMagazineReloading;
             _magazine.Reloaded += OnMagazineReloaded;
             _magazine.ReloadingCanceled += OnMagazineReloadingCanceled;
+        }
 
-            SetUIVisibility(false);
+        private void ClearEvents()
+        {
+            _magazine.Reloading -= OnMagazineReloading;
+            _magazine.Reloaded -= OnMagazineReloaded;
+            _magazine.ReloadingCanceled -= OnMagazineReloadingCanceled;
         }
 
 

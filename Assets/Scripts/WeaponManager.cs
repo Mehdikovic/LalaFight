@@ -30,17 +30,16 @@ namespace LalaFight
 
         private Weapon[] _weapons;
         private InventoryItemWeapon[] _weaponInventoryItems;
-        //private Dictionary<InventoryItemWeapon, Weapon> _inventoryToWeapon;
         private HashSet<InventoryItemWeapon> _inventoryToWeapon;
         private int _currentWeaponIndex = 0;
         private bool _isWeaponHided = false;
 
 
-        public event Action WeaponSwapped;
-        public event Action WeaponAdded;
+        public event Action<Weapon, Weapon> WeaponSwapped;
+        public event Action<Weapon> WeaponAdded;
         public event Action<bool> WeaponHideStateChanged;
 
-        public Weapon currentWeapon => _weapons[_currentWeaponIndex];
+        public Weapon currentWeapon => _weapons?[_currentWeaponIndex];
         public bool isWeaponHided => _isWeaponHided;
         public bool isWeaponAnimating => currentWeapon.isAnimating;
 
@@ -49,7 +48,6 @@ namespace LalaFight
             _weapons = new Weapon[_allowedWeaponNumber];
             _weaponInventoryItems = new InventoryItemWeapon[_allowedWeaponNumber];
 
-            //_inventoryToWeapon = new Dictionary<InventoryItemWeapon, Weapon>(_allowedWeaponNumber);
             _inventoryToWeapon = new HashSet<InventoryItemWeapon>();
 
             var pistol = InstantiateWeapon(_pistolStartGun);
@@ -78,16 +76,16 @@ namespace LalaFight
             return weapon;
         }
 
-        public void SetCursorPositionAndLookAt(Vector3 hitPoint, float length, bool aimOnEnemy)
+        public void SetCursorPositionAndLookAt(Vector3 hitPoint, float length)
         {
-            currentWeapon?.SetShootCursorPosition(hitPoint, aimOnEnemy);
             if (length > 1)
                 _weaponHolder.LookAt(hitPoint);
         }
 
         public void SwapWeapon(int changeIndex)
         {
-            if (currentWeapon == null || currentWeapon.isAnimating) return;
+            if (currentWeapon == null || currentWeapon.isAnimating) 
+                return;
 
             int weaponsCount = 0;
             for (int index = 0; index < _weapons.Length; ++index)
@@ -111,9 +109,9 @@ namespace LalaFight
                 if (oldCurrentWeaponIndex == _currentWeaponIndex)
                     return;
 
-                _weapons[oldCurrentWeaponIndex].OnWeaponUnload();
-                _weapons[_currentWeaponIndex].OnWeaponLoad();
-                WeaponSwapped?.Invoke();
+                _weapons[oldCurrentWeaponIndex].WeaponUnload();
+                _weapons[_currentWeaponIndex].WeaponLoad();
+                WeaponSwapped?.Invoke(_weapons[oldCurrentWeaponIndex], _weapons[_currentWeaponIndex]);
             }
         }
 
@@ -140,7 +138,7 @@ namespace LalaFight
             if (fastLoad == true)
                 currentWeapon.FastLoad(_isWeaponHided);
             else
-                currentWeapon.OnWeaponLoad();
+                currentWeapon.WeaponLoad();
 
             WeaponHideStateChanged?.Invoke(_isWeaponHided);
         }
@@ -158,7 +156,7 @@ namespace LalaFight
             if (fastUnload == true)
                 currentWeapon.FastUnload();
             else
-                currentWeapon.OnWeaponUnload();
+                currentWeapon.WeaponUnload();
 
             WeaponHideStateChanged?.Invoke(_isWeaponHided);
         }
@@ -194,7 +192,7 @@ namespace LalaFight
                 var oldMountInfo = DoAddingWeaponWithSwapping(mountInfo, 0);
 
                 _currentWeaponIndex = 0;
-                _weapons[0].OnWeaponLoad();
+                _weapons[0].WeaponLoad();
 
                 return oldMountInfo;
             }
@@ -210,13 +208,13 @@ namespace LalaFight
                     return mountInfo;
 
                 var oldMountInfo = DoAddingWeaponWithSwapping(mountInfo, _currentWeaponIndex);
-                _weapons[_currentWeaponIndex].OnWeaponLoad();
+                _weapons[_currentWeaponIndex].WeaponLoad();
                 return oldMountInfo;
             }
 
             currentWeapon?.FastUnload();
             DoAddingWeaponWithSwapping(mountInfo, index);
-            _weapons[index].OnWeaponLoad();
+            _weapons[index].WeaponLoad();
             _currentWeaponIndex = index;
             return new WeaponMountInfo();
         }
@@ -253,7 +251,7 @@ namespace LalaFight
             newWeapon.currentMagazine = mountInfo.rounds;
             newWeapon.SetOwner(transform);
 
-            WeaponAdded?.Invoke();
+            WeaponAdded?.Invoke(newWeapon);
         }
 
         private void SyncWeaponWithHolder(Weapon newWeapon)

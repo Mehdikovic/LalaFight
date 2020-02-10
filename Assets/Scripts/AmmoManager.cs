@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -21,12 +22,15 @@ namespace LalaFight
 
         public Dictionary<BulletType, AmmoMountInfo> ammoInventory => _ammoInventory;
 
+        public event Action AmmoAdded;
+
         private void Awake()
         {
             _ammoInventory = new Dictionary<BulletType, AmmoMountInfo>();
             _ammoInventory.Add(BulletType.Small, _smallAmmo);
             _ammoInventory.Add(BulletType.Medium, _mediumAmmo);
             _ammoInventory.Add(BulletType.Heavy, _heavyAmmo);
+            AmmoAdded?.Invoke();
         }
 
         public void AddAmmoToInventory(BulletType ammoType, int amount)
@@ -36,6 +40,7 @@ namespace LalaFight
             mountInfo.rounds = Mathf.Clamp(mountInfo.rounds + amount, 0, 999);
             
             _ammoInventory[ammoType] = mountInfo;
+            AmmoAdded?.Invoke();
         }
 
         public int GetAmmo(BulletType ammoType) => _ammoInventory[ammoType].rounds;

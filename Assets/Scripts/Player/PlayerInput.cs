@@ -23,7 +23,7 @@ namespace LalaFight
         private Plane _plane;
 
         //EVENTS
-        public event Action<Vector3, Vector3> OnHitPointSet;
+        public event Action<Vector3, Vector3, bool> OnHitPointSet;
 
         private void Awake()
         {
@@ -63,8 +63,8 @@ namespace LalaFight
             float lengthToPlayer = hitPoint.sqrLengthTo(transform.position);
             if (lengthToPlayer > 1)
                 _playerController.LookAt(hitPoint);
-            _weaponManager.SetCursorPositionAndLookAt(hitPoint, lengthToPlayer, enemyRayCast);
-            OnHitPointSet?.Invoke(hitPoint, _camera.transform.forward);
+            _weaponManager.SetCursorPositionAndLookAt(hitPoint, lengthToPlayer);
+            OnHitPointSet?.Invoke(hitPoint, _camera.transform.forward, enemyRayCast);
 
             //Melee Attack
             if (Input.GetKey(KeyCode.Space))
