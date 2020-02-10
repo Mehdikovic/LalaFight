@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -31,7 +30,6 @@ namespace LalaFight
             _weapon = weapon;
             RegisterEvents();
 
-            _holder.SetActive(true);
             _spriteUI.sprite = _weapon.sprite;
             
             if (_spriteUI.sprite == null)
@@ -51,7 +49,6 @@ namespace LalaFight
 
         private void ClearUI()
         {
-            _holder.SetActive(false);
             _spriteUI.sprite = null;
             _spriteUI.color = Color.clear;
             _currentMagazine.text = "";
