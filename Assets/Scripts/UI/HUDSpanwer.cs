@@ -21,19 +21,19 @@ namespace LalaFight
             Canvas mainCanvas = GameObject.FindObjectOfType<Canvas>();
 
             _weaponManager = GetComponent<WeaponManager>();
-            _weaponManager.WeaponHideStateChanged += _weaponManager_WeaponHideStateChanged;
-            _weaponManager.WeaponAdded += _weaponManager_WeaponAdded;
-            _weaponManager.WeaponSwapped += _weaponManager_WeaponSwapped;
+            _weaponManager.WeaponHideStateChanged += WeaponManager_OnWeaponHideStateChanged;
+            _weaponManager.WeaponAdded += WeaponManager_OnWeaponAdded;
+            _weaponManager.WeaponSwapped += WeaponManager_OnWeaponSwapped;
 
-            GetComponent<AmmoManager>().AmmoAdded += HUDSpanwer_AmmoAdded;
+            GetComponent<AmmoManager>().AmmoAdded += AmmoManager_OnAmmoAdded;
 
             if (mainCanvas == null)
                 return;
 
             if (_gameOverUIPrefab != null)
             {
-                var obj = Instantiate(_gameOverUIPrefab, mainCanvas.transform);
-                obj.Init(transform);
+                var gameOverUI = Instantiate(_gameOverUIPrefab, mainCanvas.transform);
+                gameOverUI.Init(player: transform);
             }
 
             if (_weaponReloadUIPrefab != null)
@@ -44,7 +44,7 @@ namespace LalaFight
 
         }
 
-        private void HUDSpanwer_AmmoAdded()
+        private void AmmoManager_OnAmmoAdded()
         {
             if (_weaponUI != null)
                 _weaponUI.Bind(_weaponManager.currentWeapon);
@@ -52,13 +52,13 @@ namespace LalaFight
             _weaponUI.Activate(!_weaponManager.isWeaponHided);
         }
 
-        private void _weaponManager_WeaponHideStateChanged(bool isHided)
+        private void WeaponManager_OnWeaponHideStateChanged(bool isHided)
         {
             if (_weaponUI != null)
                 _weaponUI.Activate(!isHided);
         }
 
-        private void _weaponManager_WeaponSwapped(Weapon oldWeapon, Weapon newWeapon)
+        private void WeaponManager_OnWeaponSwapped(Weapon oldWeapon, Weapon newWeapon)
         {
             if (_reloadUI != null)
             {
@@ -73,7 +73,7 @@ namespace LalaFight
             }
         }
 
-        private void _weaponManager_WeaponAdded(Weapon newWeapon)
+        private void WeaponManager_OnWeaponAdded(Weapon newWeapon)
         {
             if (_reloadUI != null)
                 _reloadUI.Bind(newWeapon);
