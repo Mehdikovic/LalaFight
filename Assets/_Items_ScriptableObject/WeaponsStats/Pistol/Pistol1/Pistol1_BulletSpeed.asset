@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33baebcb6eb11e941aedb770c8e86af5, type: 3}
   m_Name: Pistol1_BulletSpeed
   m_EditorClassIdentifier: 
-  _defaultValue: 100
+  _defaultValue: 800
   _values: 
